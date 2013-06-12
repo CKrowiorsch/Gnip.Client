@@ -7,6 +7,8 @@ using NLog;
 
 using Newtonsoft.Json;
 
+using Krowiorsch.Gnip.Extensions;
+
 namespace Krowiorsch.Gnip
 {
     class Program
@@ -27,6 +29,9 @@ namespace Krowiorsch.Gnip
             var simpleHttpStreaming = new ReconnectableHttpStreaming(streamingEndpoint, accessToken);
             simpleHttpStreaming.Stream.Subscribe(line => Logger.Debug("l:{0}", line));
 
+            simpleHttpStreaming.Stream.ToActivity().Subscribe(a => Logger.Info(string.Format("New Activity: {0}", a.GetContent())));
+
+            // start
             simpleHttpStreaming.ReadAsync().ContinueWith(t => Logger.Info("Streaming terminated"));
 
 

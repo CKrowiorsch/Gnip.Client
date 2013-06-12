@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Krowiorsch.Gnip.Model.Facebook
+namespace Krowiorsch.Gnip.Model.Data
 {
-    public class FacebookBookmark : FacebookRoot
+    public class ActivityBookmark : Activity
     {
         public string BookmarkTitle { get; set; }
 
@@ -11,7 +11,6 @@ namespace Krowiorsch.Gnip.Model.Facebook
         public string BookmarkContent { get; set; }
 
         public string BookmarkSummary { get; set; }
-
 
         public string Related { get; set; }
 

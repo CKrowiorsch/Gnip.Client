@@ -59,18 +59,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converter\FacebookConvert.cs" />
-    <Compile Include="Converter\FaceBookTypeDetector.cs" />
+    <Compile Include="Converter\ActivityConvert.cs" />
+    <Compile Include="Converter\ActivityTypeDetector.cs" />
+    <Compile Include="Extensions\ObservableExtensions.cs" />
+    <Compile Include="Extensions\StreamingExtensions.cs" />
     <Compile Include="Extensions\XmlDocumentExtensions.cs" />
     <Compile Include="IHttpStreaming.cs" />
     <Compile Include="Model\ClientDisconnectReason.cs" />
-    <Compile Include="Model\Facebook\FacebookAuthor.cs" />
-    <Compile Include="Model\Facebook\FacebookBookmark.cs" />
-    <Compile Include="Model\Facebook\FacebookComment.cs" />
-    <Compile Include="Model\Facebook\FacebookNote.cs" />
-    <Compile Include="Model\Facebook\FacebookPhoto.cs" />
-    <Compile Include="Model\Facebook\FacebookRoot.cs" />
-    <Compile Include="Model\Facebook\MatchingRule.cs" />
+    <Compile Include="Model\Data\EntryAuthor.cs" />
+    <Compile Include="Model\Data\ActivityBookmark.cs" />
+    <Compile Include="Model\Data\ActivityComment.cs" />
+    <Compile Include="Model\Data\ActivityNote.cs" />
+    <Compile Include="Model\Data\ActivityPhoto.cs" />
+    <Compile Include="Model\Data\Activity.cs" />
+    <Compile Include="Model\Data\MatchingRule.cs" />
     <Compile Include="Model\GnipAccessToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReconnectableHttpStreaming.cs" />

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Krowiorsch.Gnip.Model.Facebook
+namespace Krowiorsch.Gnip.Model.Data
 {
-    public class FacebookNote : FacebookRoot
+    public class ActivityNote : Activity
     {
         public string NoteTitle { get; set; }
         

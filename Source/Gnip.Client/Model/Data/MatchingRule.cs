@@ -1,4 +1,4 @@
-﻿namespace Krowiorsch.Gnip.Model.Facebook
+﻿namespace Krowiorsch.Gnip.Model.Data
 {
     public class MatchingRule
     {

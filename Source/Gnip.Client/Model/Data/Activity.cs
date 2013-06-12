@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Krowiorsch.Gnip.Model.Facebook
+namespace Krowiorsch.Gnip.Model.Data
 {
-    public class FacebookRoot
+    public class Activity
     {
         public string Id { get; set; }
 
@@ -18,7 +18,7 @@ namespace Krowiorsch.Gnip.Model.Facebook
         
         public string Link { get; set; }
 
-        public FacebookAuthor Author { get; set; }
+        public EntryAuthor Author { get; set; }
 
         public MatchingRule[] Rules { get; set; }
 

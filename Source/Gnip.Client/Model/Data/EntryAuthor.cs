@@ -1,6 +1,6 @@
-﻿namespace Krowiorsch.Gnip.Model.Facebook
+﻿namespace Krowiorsch.Gnip.Model.Data
 {
-    public class FacebookAuthor
+    public class EntryAuthor
     {
         public string Name { get; set; }
 

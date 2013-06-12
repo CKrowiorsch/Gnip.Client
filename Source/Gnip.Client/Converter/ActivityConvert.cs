@@ -3,38 +3,38 @@ using System.Collections.Generic;
 using System.Xml;
 
 using Krowiorsch.Gnip.Extensions;
-using Krowiorsch.Gnip.Model.Facebook;
+using Krowiorsch.Gnip.Model.Data;
 
 using NLog;
 
 namespace Krowiorsch.Gnip.Converter
 {
-    public class FacebookConvert
+    public class ActivityConvert
     {
         static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public static FacebookRoot Deserialize(string xml)
+        public static Activity Deserialize(string xml)
         {
             try
             {
                 var xmlDocument = new XmlDocument();
                 xmlDocument.LoadXml(xml);
 
-                var detector = new FaceBookTypeDetector();
+                var detector = new ActivityTypeDetector();
 
                 var namespaceManager = CreateNamespaceManager(xmlDocument);
                 var type = detector.Detect(xmlDocument, namespaceManager);
 
-                if (type == typeof(FacebookComment))
+                if (type == typeof(ActivityComment))
                     return DeserializeComment(xmlDocument, namespaceManager);
 
-                if (type == typeof(FacebookNote))
+                if (type == typeof(ActivityNote))
                     return DeserializeNote(xmlDocument, namespaceManager);
 
-                if (type == typeof(FacebookPhoto))
+                if (type == typeof(ActivityPhoto))
                     return DeserializePhoto(xmlDocument, namespaceManager);
 
-                if (type == typeof(FacebookBookmark))
+                if (type == typeof(ActivityBookmark))
                     return DeserializeBookmark(xmlDocument, namespaceManager);
 
                 return DeserializeUnknown(xmlDocument, namespaceManager);
@@ -59,18 +59,18 @@ namespace Krowiorsch.Gnip.Converter
             return namespaceManager;
         }
 
-        static FacebookRoot DeserializeUnknown(XmlDocument document, XmlNamespaceManager namespaceManager)
+        static Activity DeserializeUnknown(XmlDocument document, XmlNamespaceManager namespaceManager)
         {
-            var root = new FacebookRoot();
+            var root = new Activity();
 
             FillAtomFeedProperties(ref root, document, namespaceManager);
             return root;
         }
 
-        static FacebookRoot DeserializeNote(XmlDocument document, XmlNamespaceManager namespaceManager)
+        static Activity DeserializeNote(XmlDocument document, XmlNamespaceManager namespaceManager)
         {
-            var note = new FacebookNote();
-            var root = note as FacebookRoot;
+            var note = new ActivityNote();
+            var root = note as Activity;
 
             FillAtomFeedProperties(ref root, document, namespaceManager);
 
@@ -85,10 +85,10 @@ namespace Krowiorsch.Gnip.Converter
             return note;
         }
 
-        static FacebookRoot DeserializeComment(XmlDocument document, XmlNamespaceManager namespaceManager)
+        static Activity DeserializeComment(XmlDocument document, XmlNamespaceManager namespaceManager)
         {
-            var comment = new FacebookComment();
-            var root = comment as FacebookRoot;
+            var comment = new ActivityComment();
+            var root = comment as Activity;
 
             FillAtomFeedProperties(ref root, document, namespaceManager);
 
@@ -101,10 +101,10 @@ namespace Krowiorsch.Gnip.Converter
             return comment;
         }
 
-        static FacebookPhoto DeserializePhoto(XmlDocument document, XmlNamespaceManager namespaceManager)
+        static ActivityPhoto DeserializePhoto(XmlDocument document, XmlNamespaceManager namespaceManager)
         {
-            var photo = new FacebookPhoto();
-            var root = photo as FacebookRoot;
+            var photo = new ActivityPhoto();
+            var root = photo as Activity;
 
             FillAtomFeedProperties(ref root, document, namespaceManager);
 
@@ -120,10 +120,10 @@ namespace Krowiorsch.Gnip.Converter
             return photo;
         }
 
-        static FacebookBookmark DeserializeBookmark(XmlDocument document, XmlNamespaceManager namespaceManager)
+        static ActivityBookmark DeserializeBookmark(XmlDocument document, XmlNamespaceManager namespaceManager)
         {
-            var bookmark = new FacebookBookmark();
-            var root = bookmark as FacebookRoot;
+            var bookmark = new ActivityBookmark();
+            var root = bookmark as Activity;
 
             FillAtomFeedProperties(ref root, document, namespaceManager);
 
@@ -143,7 +143,7 @@ namespace Krowiorsch.Gnip.Converter
             return bookmark;
         }
 
-        static void FillAtomFeedProperties(ref FacebookRoot root, XmlDocument document, XmlNamespaceManager namespaceManager)
+        static void FillAtomFeedProperties(ref Activity root, XmlDocument document, XmlNamespaceManager namespaceManager)
         {
             root.Id = document.SelectSingleNode("atom:entry/atom:id", namespaceManager).InnerTextOrEmpty();
             root.Title = document.SelectSingleNode("atom:entry/atom:title", namespaceManager).InnerTextOrEmpty();
@@ -179,9 +179,9 @@ namespace Krowiorsch.Gnip.Converter
             return list.ToArray();
         }
 
-        static FacebookAuthor ReadAuthor(XmlDocument document, XmlNamespaceManager namespaceManager)
+        static EntryAuthor ReadAuthor(XmlDocument document, XmlNamespaceManager namespaceManager)
         {
-            return new FacebookAuthor
+            return new EntryAuthor
             {
                 Name = document.SelectSingleNode("atom:entry/atom:author/atom:name", namespaceManager).InnerTextOrEmpty(),
                 Link = document.SelectSingleNode("atom:entry/atom:author/atom:uri", namespaceManager).InnerTextOrEmpty()

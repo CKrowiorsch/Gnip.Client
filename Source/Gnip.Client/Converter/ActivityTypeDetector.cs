@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Xml;
 
-using Krowiorsch.Gnip.Model.Facebook;
+using Krowiorsch.Gnip.Model.Data;
 
 namespace Krowiorsch.Gnip.Converter
 {
-    public class FaceBookTypeDetector
+    public class ActivityTypeDetector
     {
         public Type Detect(XmlDocument document, XmlNamespaceManager namespaceManager)
         {
@@ -15,19 +15,19 @@ namespace Krowiorsch.Gnip.Converter
                 throw new ArgumentOutOfRangeException();
 
             if (typeNode.InnerText.Equals("http://activitystrea.ms/schema/1.0/comment", StringComparison.OrdinalIgnoreCase))
-                return typeof(FacebookComment);
+                return typeof(ActivityComment);
 
             if (typeNode.InnerText.Equals("http://activitystrea.ms/schema/1.0/note", StringComparison.OrdinalIgnoreCase))
-                return typeof(FacebookNote);
+                return typeof(ActivityNote);
 
             if (typeNode.InnerText.Equals("http://activitystrea.ms/schema/1.0/photo", StringComparison.OrdinalIgnoreCase))
-                return typeof(FacebookPhoto);
+                return typeof(ActivityPhoto);
 
             if (typeNode.InnerText.Equals("http://activitystrea.ms/schema/1.0/bookmark", StringComparison.OrdinalIgnoreCase))
-                return typeof(FacebookBookmark);
+                return typeof(ActivityBookmark);
 
 
-            return typeof(FacebookRoot);
+            return typeof(Activity);
         }
     }
 }
