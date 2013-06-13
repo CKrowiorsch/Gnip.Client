@@ -27,9 +27,9 @@ namespace Krowiorsch.Gnip
             Logger.Info(string.Format("Use Endpoint: {0}", streamingEndpoint));
 
             var simpleHttpStreaming = new ReconnectableHttpStreaming(streamingEndpoint, accessToken);
-            simpleHttpStreaming.Stream.Subscribe(line => Logger.Debug("l:{0}", line));
+            //simpleHttpStreaming.Stream.Subscribe(line => Logger.Debug("l:{0}", line));
 
-            simpleHttpStreaming.Stream.ToActivity().Subscribe(a => Logger.Info(string.Format("New Activity: {0}", a.GetContent())));
+            simpleHttpStreaming.Stream.ToActivity().Subscribe(a => Logger.Info(string.Format("New Activity [{1}]: {0}", a.GetContent(), a.GetType().Name)));
 
             // start
             simpleHttpStreaming.ReadAsync().ContinueWith(t => Logger.Info("Streaming terminated"));
