@@ -63,6 +63,7 @@
     <Compile Include="Converter\ActivityTypeDetector.cs" />
     <Compile Include="Extensions\ObservableExtensions.cs" />
     <Compile Include="Extensions\StreamingExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\XmlDocumentExtensions.cs" />
     <Compile Include="IHttpStreaming.cs" />
     <Compile Include="Model\ClientDisconnectReason.cs" />

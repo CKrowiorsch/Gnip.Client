@@ -1,13 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 using Krowiorsch.Gnip.Model;
 
 using NLog;
 
 using Newtonsoft.Json;
-
-using Krowiorsch.Gnip.Extensions;
 
 namespace Krowiorsch.Gnip
 {
@@ -18,22 +17,21 @@ namespace Krowiorsch.Gnip
         static void Main(string[] args)
         {
             const string FileToAccessToken = @"c:\Data\gnip_access.json";
-            const string FileToStreamingEndpoint = @"c:\Data\gnip_endpoint.json";
+            const string FileToStreamingEndpoints = @"c:\Data\gnip_endpoint.json";
             
             var accessToken = GnipAccessToken.FromJsonStream(new FileStream(FileToAccessToken, FileMode.Open));
-            var streamingEndpoint = JsonConvert.DeserializeObject<string>(File.ReadAllText(FileToStreamingEndpoint));
+            var streamingEndpoint = JsonConvert.DeserializeObject<string[]>(File.ReadAllText(FileToStreamingEndpoints));
 
             Logger.Info(string.Format("Use AccessToken: Username:{0} Password:{1}", accessToken.Username, accessToken.Password));
-            Logger.Info(string.Format("Use Endpoint: {0}", streamingEndpoint));
+            Logger.Info(string.Format("Use Endpoint: {0}", streamingEndpoint[0]));
 
-            var simpleHttpStreaming = new ReconnectableHttpStreaming(streamingEndpoint, accessToken);
-            //simpleHttpStreaming.Stream.Subscribe(line => Logger.Debug("l:{0}", line));
+            //new Scenarios.RawDataScenario.Scenario(accessToken, streamingEndpoint[0])
+            //    .Start()
+            //    .ContinueWith(t => Logger.Info("Scenario abgeschlossen"));
 
-            simpleHttpStreaming.Stream.ToActivity().Subscribe(a => Logger.Info(string.Format("New Activity [{1}]: {0}", a.GetContent(), a.GetType().Name)));
-
-            // start
-            simpleHttpStreaming.ReadAsync().ContinueWith(t => Logger.Info("Streaming terminated"));
-
+            new Scenarios.MultipleStreamScenario.Scenario(accessToken, streamingEndpoint)
+                .Start()
+                .ContinueWith(t => Logger.Info("Scenario abgeschlossen"));
 
             Console.ReadLine();
         }

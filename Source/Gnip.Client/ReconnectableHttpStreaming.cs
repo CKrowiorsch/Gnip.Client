@@ -41,7 +41,7 @@ namespace Krowiorsch.Gnip
                 {
                     while (true)
                     {
-                        Logger.Info("Connect");
+                        Logger.Info(string.Format("Connect to {0}", _streamingEndpoint));
                         var clientDisconnectReason = StartObserving(cancellationToken);
 
                         switch (clientDisconnectReason)
@@ -72,6 +72,8 @@ namespace Krowiorsch.Gnip
             {
                 try
                 {
+                    Logger.Debug(string.Format("ResponseStream Opened:{0}", _streamingEndpoint));
+
                     while (!reader.EndOfStream)
                     {
                         var line = reader.ReadLine();
