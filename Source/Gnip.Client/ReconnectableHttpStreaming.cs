@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
-using System.Net;
 using System.Reactive.Subjects;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Krowiorsch.Gnip.Impl;
 using Krowiorsch.Gnip.Model;
 
 using NLog;
@@ -66,7 +66,7 @@ namespace Krowiorsch.Gnip
 
         private ClientDisconnectReason StartObserving(CancellationToken cancellationToken)
         {
-            using (var response = (HttpWebResponse)BuildWebRequest().GetResponse())
+            using (var response = GnipWebRequest.Create(_accessToken, _streamingEndpoint).GetResponse())
             using (var reponseStream = response.GetResponseStream())
             using (var reader = new StreamReader(reponseStream))
             {
@@ -103,24 +103,6 @@ namespace Krowiorsch.Gnip
 
                 return ClientDisconnectReason.Success;
             }
-        }
-
-        private WebRequest BuildWebRequest()
-        {
-            var request = (HttpWebRequest)WebRequest.Create(_streamingEndpoint);
-            request.Method = "GET";
-
-            string username = _accessToken.Username;
-            string password = _accessToken.Password;
-
-            var nc = new NetworkCredential(username, password);
-            request.Credentials = nc;
-
-            request.PreAuthenticate = true;
-            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
-            request.Headers.Add("Accept-Encoding", "gzip");
-
-            return request;
         }
     }
 }

@@ -66,6 +66,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\XmlDocumentExtensions.cs" />
     <Compile Include="IHttpStreaming.cs" />
+    <Compile Include="Impl\GnipWebRequest.cs" />
     <Compile Include="Model\ClientDisconnectReason.cs" />
     <Compile Include="Model\Data\EntryAuthor.cs" />
     <Compile Include="Model\Data\ActivityBookmark.cs" />
