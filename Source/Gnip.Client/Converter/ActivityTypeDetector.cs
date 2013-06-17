@@ -26,6 +26,9 @@ namespace Krowiorsch.Gnip.Converter
             if (typeNode.InnerText.Equals("http://activitystrea.ms/schema/1.0/bookmark", StringComparison.OrdinalIgnoreCase))
                 return typeof(ActivityBookmark);
 
+            if (typeNode.InnerText.Equals("http://activitystrea.ms/schema/1.0/video", StringComparison.OrdinalIgnoreCase))
+                return typeof(ActivityVideo);
+
 
             return typeof(Activity);
         }

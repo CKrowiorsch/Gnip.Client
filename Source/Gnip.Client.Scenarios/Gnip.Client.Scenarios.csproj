@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenarios\AddRulesScenario\Scenario.cs" />
     <Compile Include="Scenarios\MultipleStreamScenario\Scenario.cs" />
     <Compile Include="Scenarios\RawDataScenario\Scenario.cs" />
     <Compile Include="Scenarios\RulesScenario\Scenario.cs" />

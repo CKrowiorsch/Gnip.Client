@@ -83,7 +83,7 @@ namespace Krowiorsch.Gnip.Impl
 
         public void Delete(Rule[] rules)
         {
-            var request = BuildWebRequest(_baseUrl + "rules.json", _credentials);
+            var request = BuildWebRequest(_baseUrl + "/rules.json", _credentials);
             request.Method = "DELETE";
             byte[] byteArray = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new Rules(rules)));
             request.ContentType = "application/x-www-form-urlencoded";
@@ -107,6 +107,13 @@ namespace Krowiorsch.Gnip.Impl
                 .ContinueWith(t => JsonConvert.DeserializeObject<Rules>(t.Result).List).Result;
         }
 
+        public string Endpoint
+        {
+            get
+            {
+                return _baseUrl;
+            }
+        }
 
         public HttpWebRequest BuildWebRequest(string url, ICredentials credentials)
         {

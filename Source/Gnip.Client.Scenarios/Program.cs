@@ -28,13 +28,17 @@ namespace Krowiorsch.Gnip
             //    .Start()
             //    .ContinueWith(t => Logger.Info("Scenario abgeschlossen"));
 
-            new Scenarios.MultipleStreamScenario.Scenario(accessToken, streamingEndpoint)
-                .Start()
-                .ContinueWith(t => Logger.Info("Scenario abgeschlossen"));
-
-            //new Scenarios.RulesScenario.Scenario(accessToken, streamingEndpoint[0])
+            //new Scenarios.MultipleStreamScenario.Scenario(accessToken, streamingEndpoint)
             //    .Start()
-            //    .ContinueWith(t => "Finish");
+            //    .ContinueWith(t => Logger.Info("Scenario abgeschlossen"));
+
+            new Scenarios.AddRulesScenario.Scenario(accessToken, streamingEndpoint[0])
+                .Start()
+                .ContinueWith(t => "Finish");
+
+            new Scenarios.RulesScenario.Scenario(accessToken, streamingEndpoint[0])
+                .Start()
+                .ContinueWith(t => "Finish");
 
             Console.ReadLine();
         }

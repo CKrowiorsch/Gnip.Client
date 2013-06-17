@@ -37,6 +37,9 @@ namespace Krowiorsch.Gnip.Converter
                 if (type == typeof(ActivityBookmark))
                     return DeserializeBookmark(xmlDocument, namespaceManager);
 
+                if (type == typeof(ActivityVideo))
+                    return DeserializeVideo(xmlDocument, namespaceManager);
+
                 return DeserializeUnknown(xmlDocument, namespaceManager);
             }
             catch (Exception e)
@@ -83,6 +86,25 @@ namespace Krowiorsch.Gnip.Converter
             note.LikeCount = string.IsNullOrEmpty(likeCount) ? 0 : int.Parse(likeCount);
 
             return note;
+        }
+
+        static Activity DeserializeVideo(XmlDocument document, XmlNamespaceManager namespaceManager)
+        {
+            var video = new ActivityVideo();
+            var root = video as Activity;
+
+            FillAtomFeedProperties(ref root, document, namespaceManager);
+
+            video.VideoTitle = document.SelectSingleNode("atom:entry/activity:object/atom:title", namespaceManager).InnerTextOrEmpty();
+            video.VideoSubtitle = document.SelectSingleNode("atom:entry/activity:object/atom:subtitle", namespaceManager).InnerTextOrEmpty();
+            video.VideoSummary = document.SelectSingleNode("atom:entry/activity:object/atom:summary", namespaceManager).InnerTextOrEmpty();
+            video.VideoContent = document.SelectSingleNode("atom:entry/activity:object/atom:content", namespaceManager).InnerTextOrEmpty();
+            video.VideoContent = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='alternate']/@href", namespaceManager).InnerTextOrEmpty();
+            video.Via = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='via']/@href", namespaceManager).InnerTextOrEmpty();
+            video.Related = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='related']/@href", namespaceManager).InnerTextOrEmpty();
+            video.Preview = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='preview']/@href", namespaceManager).InnerTextOrEmpty();
+
+            return video;
         }
 
         static Activity DeserializeComment(XmlDocument document, XmlNamespaceManager namespaceManager)
