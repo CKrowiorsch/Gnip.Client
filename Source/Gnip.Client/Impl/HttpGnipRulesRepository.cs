@@ -14,22 +14,22 @@ using System.Linq;
 
 namespace Krowiorsch.Gnip.Impl
 {
-    public class HttpGnipRules : IGnipRules, IDisposable
+    public class HttpGnipRulesRepository : IGnipRulesRepository, IDisposable
     {
         static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         readonly HttpClient _client;
 
-        ICredentials _credentials;
-        string _baseUrl;
+        readonly ICredentials _credentials;
+        readonly string _baseUrl;
 
-        public HttpGnipRules(string baseUrl, string userName, string password)
+        public HttpGnipRulesRepository(string baseUrl, GnipAccessToken accessToken)
         {
             _baseUrl = baseUrl;
             _client = new HttpClient(new HttpClientHandler
             {
                 PreAuthenticate = true,
                 AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip,
-                Credentials = _credentials = new NetworkCredential(userName, password)
+                Credentials = _credentials = new NetworkCredential(accessToken.Username, accessToken.Password)
             }) { BaseAddress = new Uri(baseUrl) };
         }
 

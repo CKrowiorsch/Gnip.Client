@@ -32,6 +32,10 @@ namespace Krowiorsch.Gnip
                 .Start()
                 .ContinueWith(t => Logger.Info("Scenario abgeschlossen"));
 
+            //new Scenarios.RulesScenario.Scenario(accessToken, streamingEndpoint[0])
+            //    .Start()
+            //    .ContinueWith(t => "Finish");
+
             Console.ReadLine();
         }
     }

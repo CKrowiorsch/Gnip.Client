@@ -6,7 +6,7 @@ namespace Krowiorsch.Gnip
     /// <summary>
     /// Interface for managing GniopRules
     /// </summary>
-    public interface IGnipRules
+    public interface IGnipRulesRepository
     {
         void Clear();
 

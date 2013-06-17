@@ -70,10 +70,10 @@
     <Compile Include="Extensions\StreamingExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\XmlDocumentExtensions.cs" />
-    <Compile Include="IGnipRules.cs" />
+    <Compile Include="IGnipRulesRepository.cs" />
     <Compile Include="IHttpStreaming.cs" />
     <Compile Include="Impl\GnipWebRequest.cs" />
-    <Compile Include="Impl\HttpGnipRules.cs" />
+    <Compile Include="Impl\HttpGnipRulesRepository.cs" />
     <Compile Include="Model\ClientDisconnectReason.cs" />
     <Compile Include="Model\Data\EntryAuthor.cs" />
     <Compile Include="Model\Data\ActivityBookmark.cs" />
