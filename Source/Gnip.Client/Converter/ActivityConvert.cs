@@ -113,7 +113,7 @@ namespace Krowiorsch.Gnip.Converter
             photo.PhotoContent = document.SelectSingleNode("atom:entry/activity:object/atom:content", namespaceManager).InnerTextOrEmpty();
 
             photo.Via = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='via']/@href", namespaceManager).InnerTextOrEmpty();
-            photo.Link = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='alternate']/@href", namespaceManager).InnerTextOrEmpty();
+            photo.PhotoLink = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='alternate']/@href", namespaceManager).InnerTextOrEmpty();
             photo.Related = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='related']/@href", namespaceManager).InnerTextOrEmpty();
             photo.Preview = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='preview']/@href", namespaceManager).InnerTextOrEmpty();
 

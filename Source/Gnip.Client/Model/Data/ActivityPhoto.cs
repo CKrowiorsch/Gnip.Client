@@ -10,7 +10,7 @@ namespace Krowiorsch.Gnip.Model.Data
 
         public string PhotoContent { get; set; }
 
-        public string Link { get; set; }
+        public string PhotoLink { get; set; }
 
         public string Related { get; set; }
 
