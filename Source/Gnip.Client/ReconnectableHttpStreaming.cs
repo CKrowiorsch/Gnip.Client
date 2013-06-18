@@ -104,5 +104,10 @@ namespace Krowiorsch.Gnip
                 return ClientDisconnectReason.Success;
             }
         }
+
+        public void Dispose()
+        {
+            _cancellationTokenSource.Cancel();
+        }
     }
 }

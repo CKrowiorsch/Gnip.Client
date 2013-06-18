@@ -68,7 +68,7 @@
     <Compile Include="Converter\ActivityConvert.cs" />
     <Compile Include="Converter\ActivityTypeDetector.cs" />
     <Compile Include="Extensions\ObservableExtensions.cs" />
-    <Compile Include="Extensions\StreamingExtensions.cs" />
+    <Compile Include="Extensions\GnipStreamingExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\XmlDocumentExtensions.cs" />
     <Compile Include="IGnipRulesRepository.cs" />
@@ -76,6 +76,7 @@
     <Compile Include="Impl\GnipWebRequest.cs" />
     <Compile Include="Impl\HttpGnipRulesRepository.cs" />
     <Compile Include="Model\ClientDisconnectReason.cs" />
+    <Compile Include="Model\Data\ActivityQuestion.cs" />
     <Compile Include="Model\Data\ActivityVideo.cs" />
     <Compile Include="Model\Data\EntryAuthor.cs" />
     <Compile Include="Model\Data\ActivityBookmark.cs" />

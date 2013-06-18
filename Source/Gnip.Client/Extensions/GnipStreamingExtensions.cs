@@ -6,7 +6,10 @@ using Krowiorsch.Gnip.Model.Data;
 
 namespace Krowiorsch.Gnip.Extensions
 {
-    public static class StreamingExtensions
+    /// <summary>
+    /// Extension für die Nutzung mit Gnip
+    /// </summary>
+    public static class GnipStreamingExtensions
     {
         public static IObservable<Activity> ToActivity(this IObservable<string> input)
         {

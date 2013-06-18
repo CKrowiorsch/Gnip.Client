@@ -40,6 +40,12 @@ namespace Krowiorsch.Gnip.Converter
                 if (type == typeof(ActivityVideo))
                     return DeserializeVideo(xmlDocument, namespaceManager);
 
+                if (type == typeof(ActivityQuestion))
+                    return DeserializeQuestion(xmlDocument, namespaceManager);
+
+                if (type == typeof(ActivitySwf))
+                    return DeserializeSwf(xmlDocument, namespaceManager);
+
                 return DeserializeUnknown(xmlDocument, namespaceManager);
             }
             catch (Exception e)
@@ -48,6 +54,23 @@ namespace Krowiorsch.Gnip.Converter
                 throw;
             }
 
+        }
+
+        static Activity DeserializeQuestion(XmlDocument document, XmlNamespaceManager namespaceManager)
+        {
+            var question = new ActivityQuestion();
+            var root = question as Activity;
+
+            FillAtomFeedProperties(ref root, document, namespaceManager);
+
+            question.QuestionTitle = document.SelectSingleNode("atom:entry/activity:object/atom:title", namespaceManager).InnerTextOrEmpty();
+            question.Via = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='via']/@href", namespaceManager).InnerTextOrEmpty();
+            question.QuestionLink = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='alternate']/@href", namespaceManager).InnerTextOrEmpty();
+
+            var likeCount = document.SelectSingleNode("atom:entry/activity:object/gnip:statistics/@favoriteCount", namespaceManager).ValueOrEmpty();
+            question.LikeCount = string.IsNullOrEmpty(likeCount) ? 0 : int.Parse(likeCount);
+
+            return question;
         }
 
         static XmlNamespaceManager CreateNamespaceManager(XmlDocument xmlDocument)
@@ -100,6 +123,24 @@ namespace Krowiorsch.Gnip.Converter
             video.VideoSummary = document.SelectSingleNode("atom:entry/activity:object/atom:summary", namespaceManager).InnerTextOrEmpty();
             video.VideoContent = document.SelectSingleNode("atom:entry/activity:object/atom:content", namespaceManager).InnerTextOrEmpty();
             video.VideoContent = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='alternate']/@href", namespaceManager).InnerTextOrEmpty();
+            video.Via = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='via']/@href", namespaceManager).InnerTextOrEmpty();
+            video.Related = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='related']/@href", namespaceManager).InnerTextOrEmpty();
+            video.Preview = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='preview']/@href", namespaceManager).InnerTextOrEmpty();
+
+            return video;
+        }
+
+        static Activity DeserializeSwf(XmlDocument document, XmlNamespaceManager namespaceManager)
+        {
+            var video = new ActivitySwf();
+            var root = video as Activity;
+
+            FillAtomFeedProperties(ref root, document, namespaceManager);
+
+            video.SwfTitle = document.SelectSingleNode("atom:entry/activity:object/atom:title", namespaceManager).InnerTextOrEmpty();
+            video.SwfSubtitle = document.SelectSingleNode("atom:entry/activity:object/atom:subtitle", namespaceManager).InnerTextOrEmpty();
+            video.SwfContent = document.SelectSingleNode("atom:entry/activity:object/atom:summary", namespaceManager).InnerTextOrEmpty();
+            video.SwfContent = document.SelectSingleNode("atom:entry/activity:object/atom:content", namespaceManager).InnerTextOrEmpty();
             video.Via = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='via']/@href", namespaceManager).InnerTextOrEmpty();
             video.Related = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='related']/@href", namespaceManager).InnerTextOrEmpty();
             video.Preview = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='preview']/@href", namespaceManager).InnerTextOrEmpty();
