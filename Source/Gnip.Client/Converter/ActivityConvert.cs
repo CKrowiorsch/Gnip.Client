@@ -46,6 +46,12 @@ namespace Krowiorsch.Gnip.Converter
                 if (type == typeof(ActivitySwf))
                     return DeserializeSwf(xmlDocument, namespaceManager);
 
+                if (type == typeof(ActivityOffer))
+                    return DeserializeOffer(xmlDocument, namespaceManager);
+
+                if (type == typeof(ActivityOffer))
+                    return DeserializeMusic(xmlDocument, namespaceManager);
+
                 return DeserializeUnknown(xmlDocument, namespaceManager);
             }
             catch (Exception e)
@@ -54,6 +60,25 @@ namespace Krowiorsch.Gnip.Converter
                 throw;
             }
 
+        }
+
+        static Activity DeserializeMusic(XmlDocument document, XmlNamespaceManager namespaceManager)
+        {
+            var music = new ActivityMusic();
+            var root = music as Activity;
+
+            FillAtomFeedProperties(ref root, document, namespaceManager);
+
+            music.MusicTitle = document.SelectSingleNode("atom:entry/activity:object/atom:title", namespaceManager).InnerTextOrEmpty();
+            music.MusicSubTitle = document.SelectSingleNode("atom:entry/activity:object/atom:subtitle", namespaceManager).InnerTextOrEmpty();
+            music.MusicContent = document.SelectSingleNode("atom:entry/activity:object/atom:content", namespaceManager).InnerTextOrEmpty();
+            music.Via = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='via']/@href", namespaceManager).InnerTextOrEmpty();
+            music.Enclosure = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='enclosure']/@href", namespaceManager).InnerTextOrEmpty();
+
+            var likeCount = document.SelectSingleNode("atom:entry/activity:object/gnip:statistics/@favoriteCount", namespaceManager).ValueOrEmpty();
+            music.LikeCount = string.IsNullOrEmpty(likeCount) ? 0 : int.Parse(likeCount);
+
+            return music;
         }
 
         static Activity DeserializeQuestion(XmlDocument document, XmlNamespaceManager namespaceManager)
@@ -122,12 +147,30 @@ namespace Krowiorsch.Gnip.Converter
             video.VideoSubtitle = document.SelectSingleNode("atom:entry/activity:object/atom:subtitle", namespaceManager).InnerTextOrEmpty();
             video.VideoSummary = document.SelectSingleNode("atom:entry/activity:object/atom:summary", namespaceManager).InnerTextOrEmpty();
             video.VideoContent = document.SelectSingleNode("atom:entry/activity:object/atom:content", namespaceManager).InnerTextOrEmpty();
-            video.VideoContent = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='alternate']/@href", namespaceManager).InnerTextOrEmpty();
             video.Via = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='via']/@href", namespaceManager).InnerTextOrEmpty();
             video.Related = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='related']/@href", namespaceManager).InnerTextOrEmpty();
             video.Preview = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='preview']/@href", namespaceManager).InnerTextOrEmpty();
 
             return video;
+        }
+
+        static Activity DeserializeOffer(XmlDocument document, XmlNamespaceManager namespaceManager)
+        {
+            var offer = new ActivityOffer();
+            var root = offer as Activity;
+
+            FillAtomFeedProperties(ref root, document, namespaceManager);
+
+            offer.OfferTitle = document.SelectSingleNode("atom:entry/activity:object/atom:title", namespaceManager).InnerTextOrEmpty();
+            offer.OfferContent = document.SelectSingleNode("atom:entry/activity:object/atom:content", namespaceManager).InnerTextOrEmpty();
+            offer.Via = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='via']/@href", namespaceManager).InnerTextOrEmpty();
+            offer.Related = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='related']/@href", namespaceManager).InnerTextOrEmpty();
+            offer.Preview = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='preview']/@href", namespaceManager).InnerTextOrEmpty();
+
+            var likeCount = document.SelectSingleNode("atom:entry/activity:object/gnip:statistics/@favoriteCount", namespaceManager).ValueOrEmpty();
+            offer.LikeCount = string.IsNullOrEmpty(likeCount) ? 0 : int.Parse(likeCount);
+
+            return offer;
         }
 
         static Activity DeserializeSwf(XmlDocument document, XmlNamespaceManager namespaceManager)

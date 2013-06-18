@@ -35,6 +35,12 @@ namespace Krowiorsch.Gnip.Converter
             if (typeNode.InnerText.Equals("http://activitystrea.ms/schema/1.0/swf", StringComparison.OrdinalIgnoreCase))
                 return typeof(ActivitySwf);
 
+            if (typeNode.InnerText.Equals("http://activitystrea.ms/schema/1.0/offer", StringComparison.OrdinalIgnoreCase))
+                return typeof(ActivityOffer);
+
+            if (typeNode.InnerText.Equals("http://activitystrea.ms/schema/1.0/music", StringComparison.OrdinalIgnoreCase))
+                return typeof(ActivityMusic);
+
 
             return typeof(Activity);
         }

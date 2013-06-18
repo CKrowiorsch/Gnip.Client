@@ -76,7 +76,10 @@
     <Compile Include="Impl\GnipWebRequest.cs" />
     <Compile Include="Impl\HttpGnipRulesRepository.cs" />
     <Compile Include="Model\ClientDisconnectReason.cs" />
+    <Compile Include="Model\Data\ActivityMusic.cs" />
+    <Compile Include="Model\Data\ActivityOffer.cs" />
     <Compile Include="Model\Data\ActivityQuestion.cs" />
+    <Compile Include="Model\Data\ActivitySwf.cs" />
     <Compile Include="Model\Data\ActivityVideo.cs" />
     <Compile Include="Model\Data\EntryAuthor.cs" />
     <Compile Include="Model\Data\ActivityBookmark.cs" />
