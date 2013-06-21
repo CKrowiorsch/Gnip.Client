@@ -49,7 +49,7 @@ namespace Krowiorsch.Gnip.Converter
                 if (type == typeof(ActivityOffer))
                     return DeserializeOffer(xmlDocument, namespaceManager);
 
-                if (type == typeof(ActivityOffer))
+                if (type == typeof(ActivityMusic))
                     return DeserializeMusic(xmlDocument, namespaceManager);
 
                 return DeserializeUnknown(xmlDocument, namespaceManager);

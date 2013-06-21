@@ -1,0 +1,40 @@
+﻿<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>10151467837330913_26125050</id>
+  <created>2013-06-19T08:01:37+00:00</created>
+  <published>2013-06-19T08:01:37+00:00</published>
+  <updated>2013-06-19T08:01:37+00:00</updated>
+  <title>이예진 posted a note to the H page on Facebook</title>
+  <category term="NotePosted" label="Note Posted" />
+  <link rel="alternate" type="html" href="http://www.facebook.com/10151467837330913/posts/26125050" />
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/21415640912/feed?limit=150&amp;access_token=534885133223787%7C3Ag8O8-0FZJAjAKL92hM6ZpsfrI" />
+    <title>Facebook - Fan Page - Feed (with comments) - 21415640912</title>
+    <updated>2013-06-19T10-07-33Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">21415640912</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon />
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>10151467837330913_26125050</id>
+    <title>정희원 이건뭐얔ㅋㅋㅋㅋㅋㅋ 티켓구해와 ㅋㅋㅋㅋ</title>
+    <content>정희원 이건뭐얔ㅋㅋㅋㅋㅋㅋ 티켓구해와 ㅋㅋㅋㅋ</content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/10151467837330913/posts/26125050" />
+    <link rel="via" type="text/html" href="http://www.facebook.com/hm" />
+  </activity:object>
+  <author>
+    <name>이예진</name>
+    <uri>http://www.facebook.com/profile.php?id=100003292223006</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=100003292223006" />
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source" tag="LM">21415640912</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>

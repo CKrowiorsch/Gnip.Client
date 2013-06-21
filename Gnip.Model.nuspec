@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>Gnip.Model</id>
+    <version>0.0.1</version>
+    <authors>Christian Krowiorsch</authors>
+    <description>Models and Converter for the Gnip.Client</description>
+    <language>de-DE</language>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="[5.0.6,)" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="gnip.model\Gnip.Model.dll" target="lib" />
+    <file src="gnip.model\Gnip.Model.xml" target="xml" />
+  </files>
+</package>

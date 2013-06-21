@@ -86,6 +86,10 @@
       <Project>{fc9adc2d-3ae0-4719-914f-736f49068ffb}</Project>
       <Name>Gnip.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gnip.Model\Gnip.Model.csproj">
+      <Project>{274f0e0d-01fa-46e9-92a2-904d2b1146a4}</Project>
+      <Name>Gnip.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,0 +1,41 @@
+﻿<entry xmlns='http://www.w3.org/2005/Atom' xmlns:activity='http://activitystrea.ms/spec/1.0/' xmlns:service='http://activitystrea.ms/service-provider' xmlns:thr='http://purl.org/syndication/thread/1.0' xmlns:gnip='http://www.gnip.com/schemas/2010'>
+  <id>114116181940002_595580697126879</id>
+  <created>2013-05-10T08:25:55+00:00</created>
+  <published>2013-05-10T08:25:55+00:00</published>
+  <updated>2013-05-10T08:25:55+00:00</updated>
+  <title>Motor Maniacs posted a note to the Motor Maniacs page on Facebook</title>
+  <category term='NotePosted' label='Note Posted'/>
+  <link rel='alternate' type='html' href='http://www.facebook.com/114116181940002/posts/595580697126879'/>
+  <source>
+    <link rel='self' type='application/json' href='https://graph.facebook.com/114116181940002/feed?limit=150&amp;access_token=AAADCJDLo0KIBAMZCKtHgZCMMV09RaIGjODeJgaOHtfCCouEqUFLIkprJrBmGjWXjBPFrvxFjZBJLoou3rpMDJeWBhlKy7XPTvuSS0fZBFwZDZD'/>
+    <title>Facebook - Fan Page - Feed (with comments) - 114116181940002</title>
+    <updated>2013-05-10T09-53-38Z</updated>
+    <gnip:rule xmlns:gnip='http://www.gnip.com/schemas/2010'>114116181940002</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>114116181940002_595580697126879</id>
+    <title>Und weiter geht's am Bodensee: Mal sehen, was die Besucher heute zu echten, ehrlichen Altautos sagen. Unser Mustang und unsere Cobra waren gestern jedenfalls der Hit hier.</title>
+    <content>Und weiter geht's am Bodensee: Mal sehen, was die Besucher heute zu echten, ehrlichen Altautos sagen. Unser Mustang und unsere Cobra waren gestern jedenfalls der Hit hier.</content>
+    <link rel='alternate' type='html' href='http://www.facebook.com/114116181940002/posts/595580697126879'/>
+    <link rel='via' type='text/html' href='http://www.facebook.com/MotorManiacsMagazin'/>
+    <gnip:statistics favoriteCount='7'/>
+  </activity:object>
+  <author>
+    <name>Motor Maniacs</name>
+    <uri>http://www.facebook.com/profile.php?id=114116181940002</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel='alternate' type='html' length='0' href='http://www.facebook.com/profile.php?id=114116181940002'/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel='source' tag='LM'>114116181940002</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
