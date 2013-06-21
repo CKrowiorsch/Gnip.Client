@@ -22,5 +22,10 @@ namespace Krowiorsch.Gnip
         /// Stops reading data
         /// </summary>
         void StopStreaming();
+
+        /// <summary>
+        /// the connected endpoint
+        /// </summary>
+        Uri Endpoint { get; }
     }
 }

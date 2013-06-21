@@ -26,6 +26,7 @@ namespace Krowiorsch.Gnip
             _replayStreaming = new ReplayActivityHttpStreaming(endpoint, accessToken, startDate);
             _observeActivityStreaming = new ObserveActivityStreaming(endpoint, accessToken);
 
+            Endpoint = new Uri(endpoint);
             Stream = _replayStreaming.Stream.Merge(_observeActivityStreaming.Stream);
         }
 
@@ -48,5 +49,10 @@ namespace Krowiorsch.Gnip
             _replayStreaming.StopStreaming();
             _observeActivityStreaming.StopStreaming();
         }
+
+        /// <summary>
+        /// Endoint
+        /// </summary>
+        public Uri Endpoint { get; private set; }
     }
 }

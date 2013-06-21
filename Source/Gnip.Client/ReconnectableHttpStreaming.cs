@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Reactive.Subjects;
@@ -26,11 +27,15 @@ namespace Krowiorsch.Gnip
         /// </summary>
         public IObservable<string> Stream { get; set; }
 
-        readonly GnipAccessToken _accessToken;
-        readonly string _streamingEndpoint;
-
-        protected Func<HttpWebRequest> WebRequestBuilder;
-        protected CancellationTokenSource CancellationTokenSource;
+        /// <summary>
+        /// Builder to create a WebRequest for this specific stream
+        /// </summary>
+        protected Func<HttpWebRequest> _webRequestBuilder;
+        
+        /// <summary>
+        /// Token to cancel request
+        /// </summary>
+        protected CancellationTokenSource _cancellationTokenSource;
 
         int _currentTimeout = 1000;
 
@@ -41,11 +46,10 @@ namespace Krowiorsch.Gnip
         /// <param name="accessToken"></param>
         public ReconnectableHttpStreaming(string streamingEndpoint, GnipAccessToken accessToken)
         {
-            _streamingEndpoint = streamingEndpoint;
-            _accessToken = accessToken;
+            Endpoint = new Uri(streamingEndpoint);
 
-            WebRequestBuilder = () => GnipWebRequest.Create(accessToken, streamingEndpoint);
-            CancellationTokenSource = new CancellationTokenSource();
+            _webRequestBuilder = () => GnipWebRequest.Create(accessToken, streamingEndpoint);
+            _cancellationTokenSource = new CancellationTokenSource();
 
             Stream = _internalSubject = new Subject<string>();
         }
@@ -55,14 +59,13 @@ namespace Krowiorsch.Gnip
         /// </summary>
         public Task ReadAsync()
         {
-            var cancellationToken = CancellationTokenSource.Token;
+            var cancellationToken = _cancellationTokenSource.Token;
 
             return Task.Factory.StartNew(
                 () =>
                 {
                     while (true)
                     {
-                        Logger.Info(string.Format("Connect to {0}", _streamingEndpoint));
                         var clientDisconnectReason = StartObserving(cancellationToken);
 
                         switch (clientDisconnectReason)
@@ -86,19 +89,17 @@ namespace Krowiorsch.Gnip
 
         public void StopStreaming()
         {
-            CancellationTokenSource.Cancel();
+            _cancellationTokenSource.Cancel();
         }
 
         protected virtual ClientDisconnectReason StartObserving(CancellationToken cancellationToken)
         {
-            using (var response = WebRequestBuilder().GetResponse())
+            using (var response = _webRequestBuilder().GetResponse())
             using (var reponseStream = response.GetResponseStream())
             using (var reader = new StreamReader(reponseStream))
             {
                 try
                 {
-                    Logger.Debug(string.Format("ResponseStream Opened:{0}", _streamingEndpoint));
-
                     while (!reader.EndOfStream)
                     {
                         var line = reader.ReadLine();
@@ -132,7 +133,12 @@ namespace Krowiorsch.Gnip
 
         public void Dispose()
         {
-            CancellationTokenSource.Cancel();
+            _cancellationTokenSource.Cancel();
         }
+
+        /// <summary>
+        /// Endoint
+        /// </summary>
+        public Uri Endpoint { get; private set; }
     }
 }

@@ -19,23 +19,26 @@ namespace Krowiorsch.Gnip
         readonly CancellationTokenSource _cancellationTokenSource;
 
         readonly GnipAccessToken _accessToken;
-        readonly string _endpoint;
 
         readonly SortedArray<string> _idsAlreadySeen = new SortedArray<string>();
 
         readonly DateTime _startDate;
         DateTime _stopDate;
         readonly Subject<Activity> _internalSubject;
+        
+        /// <summary>
+        /// Stream of activities
+        /// </summary>
         public IObservable<Activity> Stream { get; set; }
 
         public ReplayActivityHttpStreaming(string endpoint, GnipAccessToken accessToken, DateTime startDate)
         {
             _accessToken = accessToken;
-            _endpoint = endpoint;
             _startDate = startDate;
             _stopDate = DateTime.MaxValue;
             _cancellationTokenSource = new CancellationTokenSource();
 
+            Endpoint = new Uri(endpoint);
             Stream = _internalSubject = new Subject<Activity>();
         }
         
@@ -49,7 +52,7 @@ namespace Krowiorsch.Gnip
 
                 do
                 {
-                    reader = new GnipReplayReader(_endpoint, _accessToken, _startDate, _stopDate);
+                    reader = new GnipReplayReader(Endpoint.ToString(), _accessToken, _startDate, _stopDate);
                     activities = reader.ReadLines().ToActivity().ToArray();
 
                     var newIds = new List<string>();
@@ -74,6 +77,12 @@ namespace Krowiorsch.Gnip
 
         public void Dispose()
         {
+
         }
+
+        /// <summary>
+        /// Endoint
+        /// </summary>
+        public Uri Endpoint { get; private set; }
     }
 }

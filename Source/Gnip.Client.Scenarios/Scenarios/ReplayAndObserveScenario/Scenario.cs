@@ -27,12 +27,12 @@ namespace Krowiorsch.Gnip.Scenarios.ReplayAndObserveScenario
 
         public Task Start()
         {
-            DateTime startDate = DateTime.Today.AddDays(-2);
+            var startDate = DateTime.Today.AddDays(-2);
 
             var streaming = new ReplayAndObserveActivityStreaming(_streamingEndpoint, _gnipAccessToken, startDate);
 
             streaming.Stream.Subscribe(OnNewActivity);
-            Observable.Interval(TimeSpan.FromSeconds(30)).Subscribe(s => Logger.Info(string.Format("{0} Activities arrieved", _count)));
+            Observable.Interval(TimeSpan.FromSeconds(10)).Subscribe(s => Logger.Info(string.Format("{0} Activities arrived", _count)));
 
             return streaming.ReadAsync();
         }
