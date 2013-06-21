@@ -70,6 +70,8 @@
     <Compile Include="Scenarios\AddRulesScenario\Scenario.cs" />
     <Compile Include="Scenarios\MultipleStreamScenario\Scenario.cs" />
     <Compile Include="Scenarios\RawDataScenario\Scenario.cs" />
+    <Compile Include="Scenarios\ReplayAndObserveScenario\Scenario.cs" />
+    <Compile Include="Scenarios\ReplayStreamScenario\Scenario.cs" />
     <Compile Include="Scenarios\RulesScenario\Scenario.cs" />
   </ItemGroup>
   <ItemGroup>

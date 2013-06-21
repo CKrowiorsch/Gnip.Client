@@ -1,13 +1,26 @@
 ﻿using System;
-using System.Reactive.Subjects;
 using System.Threading.Tasks;
 
 namespace Krowiorsch.Gnip
 {
-    public interface IHttpStreaming : IDisposable
+    /// <summary>
+    /// Interface for HttpStreaming 
+    /// </summary>
+    public interface IHttpStreaming<T> : IDisposable
     {
-        Subject<string> Stream { get; set; }
+        /// <summary>
+        /// Stream of Lines from HttpStreaming
+        /// </summary>
+        IObservable<T> Stream { get; set; }
 
+        /// <summary>
+        /// Start reading async
+        /// </summary>
         Task ReadAsync();
+
+        /// <summary>
+        /// Stops reading data
+        /// </summary>
+        void StopStreaming();
     }
 }

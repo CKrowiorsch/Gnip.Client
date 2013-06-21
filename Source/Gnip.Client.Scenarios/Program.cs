@@ -17,7 +17,7 @@ namespace Krowiorsch.Gnip
         {
             const string FileToAccessToken = @"c:\Data\gnip_access.json";
             const string FileToStreamingEndpoints = @"c:\Data\gnip_endpoint.json";
-            
+
             var accessToken = GnipAccessToken.FromJsonStream(new FileStream(FileToAccessToken, FileMode.Open));
             var streamingEndpoint = JsonConvert.DeserializeObject<string[]>(File.ReadAllText(FileToStreamingEndpoints));
 
@@ -32,13 +32,21 @@ namespace Krowiorsch.Gnip
             //    .Start()
             //    .ContinueWith(t => Logger.Info("Scenario abgeschlossen"));
 
-            new Scenarios.AddRulesScenario.Scenario(accessToken, streamingEndpoint[0])
-                .Start()
-                .ContinueWith(t => "Finish");
+            //new Scenarios.AddRulesScenario.Scenario(accessToken, streamingEndpoint[0])
+            //    .Start()
+            //    .ContinueWith(t => "Finish");
 
-            new Scenarios.RulesScenario.Scenario(accessToken, streamingEndpoint[0])
-                .Start()
-                .ContinueWith(t => "Finish");
+            //new Scenarios.RulesScenario.Scenario(accessToken, streamingEndpoint[0])
+            //    .Start()
+            //    .ContinueWith(t => "Finish");
+
+            //new Scenarios.ReplayStreamScenario.Scenario(accessToken, streamingEndpoint[1])
+            //    .Start()
+            //    .ContinueWith(t => "Finish");
+
+            new Scenarios.ReplayAndObserveScenario.Scenario(accessToken, streamingEndpoint[1])
+                    .Start()
+                    .ContinueWith(t => "Finish");
 
             Console.ReadLine();
         }

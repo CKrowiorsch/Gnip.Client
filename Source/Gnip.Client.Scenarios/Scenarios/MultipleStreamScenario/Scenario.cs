@@ -31,13 +31,13 @@ namespace Krowiorsch.Gnip.Scenarios.MultipleStreamScenario
             streams.Select(t => t.Stream.ToActivity())
                 .Merge()
                 .Subscribe(OnNewActivity);
-                
+
             return Task.WhenAll(streams.Select(s => s.ReadAsync()));
         }
 
-            static void OnNewActivity(Activity activity)
-            {
-                Logger.Info(string.Format("New Activity Provider:{2} [{0}]: {1}", activity.GetType().Name, activity.GetContent().ToSingleLine(), activity.Link));
-            }
+        static void OnNewActivity(Activity activity)
+        {
+            Logger.Info(string.Format("New Activity Provider:{2} [{0}]: {1}", activity.GetType().Name, activity.GetContent().ToSingleLine(), activity.Link));
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Reactive.Subjects;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,30 +12,50 @@ using NLog;
 
 namespace Krowiorsch.Gnip
 {
-    public class ReconnectableHttpStreaming : IHttpStreaming
+    /// <summary>
+    /// Connects to GnipStreaming Endpoint and try reconnecting
+    /// </summary>
+    public class ReconnectableHttpStreaming : IHttpStreaming<string>
     {
         static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public Subject<string> Stream { get; set; }
+        readonly Subject<string> _internalSubject; 
+
+        /// <summary>
+        /// Stream of Lines from HttpStreaming
+        /// </summary>
+        public IObservable<string> Stream { get; set; }
 
         readonly GnipAccessToken _accessToken;
         readonly string _streamingEndpoint;
 
-        CancellationTokenSource _cancellationTokenSource;
+        protected Func<HttpWebRequest> WebRequestBuilder;
+        protected CancellationTokenSource CancellationTokenSource;
+
         int _currentTimeout = 1000;
 
+        /// <summary>
+        /// Initializes the Streamin with endpoint and accesstoken
+        /// </summary>
+        /// <param name="streamingEndpoint"></param>
+        /// <param name="accessToken"></param>
         public ReconnectableHttpStreaming(string streamingEndpoint, GnipAccessToken accessToken)
         {
             _streamingEndpoint = streamingEndpoint;
             _accessToken = accessToken;
 
-            Stream = new Subject<string>();
+            WebRequestBuilder = () => GnipWebRequest.Create(accessToken, streamingEndpoint);
+            CancellationTokenSource = new CancellationTokenSource();
+
+            Stream = _internalSubject = new Subject<string>();
         }
 
+        /// <summary>
+        /// Start reading async
+        /// </summary>
         public Task ReadAsync()
         {
-            _cancellationTokenSource = new CancellationTokenSource();
-            CancellationToken cancellationToken = _cancellationTokenSource.Token;
+            var cancellationToken = CancellationTokenSource.Token;
 
             return Task.Factory.StartNew(
                 () =>
@@ -58,15 +79,19 @@ namespace Krowiorsch.Gnip
                             case ClientDisconnectReason.TaskCancel:
                                 return;
                         }
-
                     }
                 },
                 cancellationToken);
         }
 
-        private ClientDisconnectReason StartObserving(CancellationToken cancellationToken)
+        public void StopStreaming()
         {
-            using (var response = GnipWebRequest.Create(_accessToken, _streamingEndpoint).GetResponse())
+            CancellationTokenSource.Cancel();
+        }
+
+        protected virtual ClientDisconnectReason StartObserving(CancellationToken cancellationToken)
+        {
+            using (var response = WebRequestBuilder().GetResponse())
             using (var reponseStream = response.GetResponseStream())
             using (var reader = new StreamReader(reponseStream))
             {
@@ -87,7 +112,7 @@ namespace Krowiorsch.Gnip
                         }
 
                         if (!string.IsNullOrEmpty(line))
-                            Stream.OnNext(line);
+                            _internalSubject.OnNext(line);
                     }
                 }
                 catch (IOException e)
@@ -107,7 +132,7 @@ namespace Krowiorsch.Gnip
 
         public void Dispose()
         {
-            _cancellationTokenSource.Cancel();
+            CancellationTokenSource.Cancel();
         }
     }
 }

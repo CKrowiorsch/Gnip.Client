@@ -34,6 +34,9 @@
     <DocumentationFile>bin\Release\Gnip.Client.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="C5">
+      <HintPath>..\..\packages\C5.2.2.4881.16939\lib\portable-win+net40+sl40+wp+Xbox40\C5.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -67,18 +70,23 @@
   <ItemGroup>
     <Compile Include="Converter\ActivityConvert.cs" />
     <Compile Include="Converter\ActivityTypeDetector.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ObservableExtensions.cs" />
     <Compile Include="Extensions\GnipStreamingExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\XmlDocumentExtensions.cs" />
     <Compile Include="IGnipRulesRepository.cs" />
     <Compile Include="IHttpStreaming.cs" />
+    <Compile Include="Impl\GnipReplayReader.cs" />
     <Compile Include="Impl\GnipWebRequest.cs" />
     <Compile Include="Impl\HttpGnipRulesRepository.cs" />
     <Compile Include="Model\ClientDisconnectReason.cs" />
     <Compile Include="Model\GnipAccessToken.cs" />
+    <Compile Include="ObserveActivityStreaming.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReconnectableHttpStreaming.cs" />
+    <Compile Include="ReplayActivityHttpStreaming.cs" />
+    <Compile Include="ReplayAndObserveActivityStreaming.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
