@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using System.Threading.Tasks;
 
+using Krowiorsch.Gnip.Events;
 using Krowiorsch.Gnip.Model;
 using Krowiorsch.Gnip.Model.Data;
 
@@ -10,7 +12,7 @@ namespace Krowiorsch.Gnip
     /// <summary>
     /// starts a stream from a specific date
     /// </summary>
-    public class ReplayAndObserveActivityStreaming : IHttpStreaming<Activity>
+    public class ReplayAndObserveActivityStreaming : IHttpStreaming<Activity>, IProcessEvents
     {
         readonly ReplayActivityHttpStreaming _replayStreaming;
         readonly ObserveActivityStreaming _observeActivityStreaming;
@@ -28,6 +30,7 @@ namespace Krowiorsch.Gnip
 
             Endpoint = new Uri(endpoint);
             Stream = _replayStreaming.Stream.Merge(_observeActivityStreaming.Stream);
+            Processing = _replayStreaming.Processing.Merge(_observeActivityStreaming.Processing);
         }
 
         public void Dispose()
@@ -54,5 +57,7 @@ namespace Krowiorsch.Gnip
         /// Endoint
         /// </summary>
         public Uri Endpoint { get; private set; }
+
+        public IObservable<ProcessingEventBase> Processing { get; private set; }
     }
 }

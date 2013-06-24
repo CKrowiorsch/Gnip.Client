@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Reactive.Subjects;
 
+using Krowiorsch.Gnip.Events;
 using Krowiorsch.Gnip.Model;
 using Krowiorsch.Gnip.Model.Data;
 
@@ -10,8 +12,10 @@ namespace Krowiorsch.Gnip
     /// <summary>
     /// Stream observes all new Activities on endpoint
     /// </summary>
-    public class ObserveActivityStreaming : ReconnectableHttpStreaming, IHttpStreaming<Activity>
+    public class ObserveActivityStreaming : ReconnectableHttpStreaming, IHttpStreaming<Activity>, IProcessEvents
     {
+        readonly Subject<ProcessingEventBase> _internalProcessing;
+
         /// <summary>
         /// created a stream on specific endpoint
         /// </summary>
@@ -22,6 +26,7 @@ namespace Krowiorsch.Gnip
         {
             Endpoint = new Uri(streamingEndpoint);
             Stream = base.Stream.ToActivity();
+            Processing = _internalProcessing = new Subject<ProcessingEventBase>();
         }
 
         /// <summary>
@@ -33,5 +38,7 @@ namespace Krowiorsch.Gnip
         /// Endoint
         /// </summary>
         public Uri Endpoint { get; private set; }
+
+        public IObservable<ProcessingEventBase> Processing { get; private set; }
     }
 }

@@ -44,9 +44,13 @@ namespace Krowiorsch.Gnip
             //    .Start()
             //    .ContinueWith(t => "Finish");
 
-            new Scenarios.ReplayAndObserveScenario.Scenario(accessToken, streamingEndpoint[1])
-                    .Start()
-                    .ContinueWith(t => "Finish");
+            //new Scenarios.ReplayAndObserveScenario.Scenario(accessToken, streamingEndpoint[1])
+            //        .Start()
+            //        .ContinueWith(t => "Finish");
+
+            new Scenarios.SingleTypeScenario.Scenario(accessToken, streamingEndpoint[1])
+                .Start()
+                .ContinueWith(t => Logger.Info("Scenario abgeschlossen"));
 
             Console.ReadLine();
         }

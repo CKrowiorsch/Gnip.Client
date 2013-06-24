@@ -70,6 +70,8 @@
   <ItemGroup>
     <Compile Include="Converter\ActivityConvert.cs" />
     <Compile Include="Converter\ActivityTypeDetector.cs" />
+    <Compile Include="Events\ExecuteWebRequest.cs" />
+    <Compile Include="Events\ProcessingEvent.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ObservableExtensions.cs" />
     <Compile Include="Extensions\GnipStreamingExtensions.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Impl\GnipReplayReader.cs" />
     <Compile Include="Impl\GnipWebRequest.cs" />
     <Compile Include="Impl\HttpGnipRulesRepository.cs" />
+    <Compile Include="IProcessEvents.cs" />
     <Compile Include="Model\ClientDisconnectReason.cs" />
     <Compile Include="Model\GnipAccessToken.cs" />
     <Compile Include="ObserveActivityStreaming.cs" />

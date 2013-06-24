@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using C5;
 
+using Krowiorsch.Gnip.Events;
 using Krowiorsch.Gnip.Impl;
 using Krowiorsch.Gnip.Model;
 using Krowiorsch.Gnip.Model.Data;
@@ -14,7 +15,7 @@ using Krowiorsch.Gnip.Extensions;
 
 namespace Krowiorsch.Gnip
 {
-    public class ReplayActivityHttpStreaming : IHttpStreaming<Activity>
+    public class ReplayActivityHttpStreaming : IHttpStreaming<Activity>, IProcessEvents
     {
         readonly CancellationTokenSource _cancellationTokenSource;
 
@@ -25,6 +26,7 @@ namespace Krowiorsch.Gnip
         readonly DateTime _startDate;
         DateTime _stopDate;
         readonly Subject<Activity> _internalSubject;
+        readonly Subject<ProcessingEventBase> _internalProcessing;
         
         /// <summary>
         /// Stream of activities
@@ -40,6 +42,7 @@ namespace Krowiorsch.Gnip
 
             Endpoint = new Uri(endpoint);
             Stream = _internalSubject = new Subject<Activity>();
+            Processing = _internalProcessing = new Subject<ProcessingEventBase>();
         }
         
 
@@ -52,7 +55,11 @@ namespace Krowiorsch.Gnip
 
                 do
                 {
-                    reader = new GnipReplayReader(Endpoint.ToString(), _accessToken, _startDate, _stopDate);
+                    reader = new GnipReplayReader(Endpoint.ToString(), _accessToken, _startDate, _stopDate)
+                    {
+                        OnExecuteRequest = request => _internalProcessing.OnNext(new ExecuteWebRequest { Url = request.RequestUri })
+                    };
+
                     activities = reader.ReadLines().ToActivity().ToArray();
 
                     var newIds = new List<string>();
@@ -84,5 +91,7 @@ namespace Krowiorsch.Gnip
         /// Endoint
         /// </summary>
         public Uri Endpoint { get; private set; }
+
+        public IObservable<ProcessingEventBase> Processing { get; private set; }
     }
 }

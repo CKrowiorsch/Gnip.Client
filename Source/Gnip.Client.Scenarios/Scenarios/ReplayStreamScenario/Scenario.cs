@@ -33,8 +33,6 @@ namespace Krowiorsch.Gnip.Scenarios.ReplayStreamScenario
 
             streaming.Stream.Subscribe(OnNewActivity);
 
-
-
             return streaming.ReadAsync().ContinueWith(t => Logger.Warn(string.Format("{0} Activities", _count)));
         }
 
