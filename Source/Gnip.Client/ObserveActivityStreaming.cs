@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive.Linq;
 using System.Reactive.Subjects;
 
 using Krowiorsch.Gnip.Events;
@@ -25,7 +26,14 @@ namespace Krowiorsch.Gnip
             : base(streamingEndpoint, accessToken)
         {
             Endpoint = new Uri(streamingEndpoint);
-            Stream = base.Stream.ToActivity();
+            Stream = base.Stream
+                .ToActivity()
+                .Select(a => 
+                {
+                    a.Received = DateTime.Now;              // set received to Now
+                    return a;
+                });
+
             Processing = _internalProcessing = new Subject<ProcessingEventBase>();
         }
 
