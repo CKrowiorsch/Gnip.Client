@@ -66,6 +66,8 @@ namespace Krowiorsch.Gnip
 
                     foreach (var activity in activities.Where(activity => !_idsAlreadySeen.Contains(activity.Id)))
                     {
+                        activity.Received = DateTime.Now;
+
                         _internalSubject.OnNext(activity);
                         newIds.Add(activity.Id);
                         _stopDate = activity.Published;
