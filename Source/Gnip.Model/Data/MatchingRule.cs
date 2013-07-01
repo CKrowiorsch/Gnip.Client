@@ -5,5 +5,7 @@
         public string Rule { get; set; }
 
         public string Tag { get; set; }
+
+        public string Related { get; set; }
     }
 }

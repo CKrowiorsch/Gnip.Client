@@ -1,0 +1,42 @@
+﻿<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>179800383306_10151703572143307_27373445</id>
+  <created>2013-06-29T17:46:20+00:00</created>
+  <published>2013-06-29T17:46:20+00:00</published>
+  <updated>2013-06-29T17:46:20+00:00</updated>
+  <title>Dickie Kleinzweig posted a comment to the CHIP Online page on Facebook</title>
+  <category term="CommentPosted" label="Comment Posted" />
+  <link rel="alternate" type="html" href="http://www.facebook.com/179800383306/posts/10151703572143307" />
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/179800383306/feed?limit=150&amp;access_token=AAADCJDLo0KIBAMZCKtHgZCMMV09RaIGjODeJgaOHtfCCouEqUFLIkprJrBmGjWXjBPFrvxFjZBJLoou3rpMDJeWBhlKy7XPTvuSS0fZBFwZDZD" />
+    <title>Facebook - Fan Page - Feed (with comments) - 179800383306</title>
+    <updated>2013-06-29T18-05-43Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">179800383306</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon />
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
+    <id>179800383306_10151703572143307_27373445</id>
+    <title>Was für eine Sensation. Microsoft hat den Start-Button reinvented! :P</title>
+    <content>Was für eine Sensation. Microsoft hat den Start-Button reinvented! :P</content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/179800383306/posts/10151703572143307" />
+    <link rel="via" type="text/html" href="http://www.facebook.com/CHIPde" />
+    <thr:in-reply-to type="html" href="http://www.facebook.com/179800383306/posts/10151703572143307" />
+  </activity:object>
+  <author>
+    <name>Dickie Kleinzweig</name>
+    <uri>http://www.facebook.com/profile.php?id=100003455512093</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=100003455512093" />
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source" tag="LM">179800383306</gnip:matching_rule>
+    <gnip:matching_rule rel="inferred">Microsoft</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>

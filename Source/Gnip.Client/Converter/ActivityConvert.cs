@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 
 using Krowiorsch.Gnip.Extensions;
@@ -270,15 +271,20 @@ namespace Krowiorsch.Gnip.Converter
         {
             var list = new List<MatchingRule>();
 
+            var matchingRule = document.SelectNodes("atom:entry/gnip:matching_rules/gnip:matching_rule", namespaceManager);
 
-            foreach (var rule in document.SelectNodes("atom:entry/gnip:matching_rules", namespaceManager))
+            if (matchingRule == null || matchingRule.Count == 0)
+                return list.ToArray();
+
+            foreach (var rule in matchingRule)
             {
                 var ruleNode = rule as XmlNode;
 
                 list.Add(new MatchingRule
                 {
                     Rule = ruleNode.InnerTextOrEmpty(),
-                    Tag = ruleNode == null ? string.Empty : ruleNode.Attributes["tag"].ValueOrEmpty()
+                    Tag = ruleNode == null ? string.Empty : ruleNode.Attributes["tag"].ValueOrEmpty(),
+                    Related = ruleNode == null ? string.Empty : ruleNode.Attributes["rel"].ValueOrEmpty()
                 });
             }
 
