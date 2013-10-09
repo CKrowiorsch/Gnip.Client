@@ -1,0 +1,41 @@
+﻿<entry xmlns='http://www.w3.org/2005/Atom' xmlns:activity='http://activitystrea.ms/spec/1.0/' xmlns:service='http://activitystrea.ms/service-provider' xmlns:thr='http://purl.org/syndication/thread/1.0' xmlns:gnip='http://www.gnip.com/schemas/2010'>
+  <id>50957555959_10151634728400960_28482842</id>
+  <created>2013-05-10T08:29:11+00:00</created>
+  <published>2013-05-10T08:29:11+00:00</published>
+  <updated>2013-05-10T08:29:11+00:00</updated>
+  <title>Sascha Diener posted a comment to the bigFM page on Facebook</title>
+  <category term='CommentPosted' label='Comment Posted'/>
+  <link rel='alternate' type='html' href='http://www.facebook.com/50957555959/posts/10151634728400960'/>
+  <source>
+    <link rel='self' type='application/json' href='https://graph.facebook.com/50957555959/feed?limit=150&amp;access_token=AAADCJDLo0KIBAMZCKtHgZCMMV09RaIGjODeJgaOHtfCCouEqUFLIkprJrBmGjWXjBPFrvxFjZBJLoou3rpMDJeWBhlKy7XPTvuSS0fZBFwZDZD'/>
+    <title>Facebook - Fan Page - Feed (with comments) - 50957555959</title>
+    <updated>2013-05-10T08-41-20Z</updated>
+    <gnip:rule xmlns:gnip='http://www.gnip.com/schemas/2010'>50957555959</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
+    <id>50957555959_10151634728400960_28482842</id>
+    <title>ja sicher :-D </title>
+    <content>ja sicher :-D </content>
+    <link rel='alternate' type='html' href='http://www.facebook.com/50957555959/posts/10151634728400960'/>
+    <link rel='via' type='text/html' href='http://www.facebook.com/RadiobigFM'/>
+    <thr:in-reply-to type='html' href='http://www.facebook.com/50957555959/posts/10151634728400960'/>
+  </activity:object>
+  <author>
+    <name>Sascha Diener</name>
+    <uri>http://www.facebook.com/profile.php?id=100000812502289</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel='alternate' type='html' length='0' href='http://www.facebook.com/profile.php?id=100000812502289'/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel='source' tag='LM'>50957555959</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>

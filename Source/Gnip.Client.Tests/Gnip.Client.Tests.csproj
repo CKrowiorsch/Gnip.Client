@@ -85,7 +85,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
+    <Folder Include="Model\ActivityV2\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Samples\Comment\Comment1.xml">

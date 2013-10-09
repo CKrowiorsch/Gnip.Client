@@ -21,6 +21,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnip.Model", "Source\Gnip.Model\Gnip.Model.csproj", "{274F0E0D-01FA-46E9-92A2-904D2B1146A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NActivityStream", "Source\NActivityStream\NActivityStream.csproj", "{D3495131-F4F1-462A-BED5-DE458545DFA6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Activity", "Activity", "{E5D353EC-EF09-402B-A239-5080D84D14AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NActivityStream.Tests", "Source\NActivityStream.Tests\NActivityStream.Tests.csproj", "{B68E4D84-47C1-47A8-B256-97A7E50D7707}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,8 +49,20 @@ Global
 		{274F0E0D-01FA-46E9-92A2-904D2B1146A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{274F0E0D-01FA-46E9-92A2-904D2B1146A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{274F0E0D-01FA-46E9-92A2-904D2B1146A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3495131-F4F1-462A-BED5-DE458545DFA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3495131-F4F1-462A-BED5-DE458545DFA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3495131-F4F1-462A-BED5-DE458545DFA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3495131-F4F1-462A-BED5-DE458545DFA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B68E4D84-47C1-47A8-B256-97A7E50D7707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B68E4D84-47C1-47A8-B256-97A7E50D7707}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B68E4D84-47C1-47A8-B256-97A7E50D7707}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B68E4D84-47C1-47A8-B256-97A7E50D7707}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D3495131-F4F1-462A-BED5-DE458545DFA6} = {E5D353EC-EF09-402B-A239-5080D84D14AF}
+		{B68E4D84-47C1-47A8-B256-97A7E50D7707} = {E5D353EC-EF09-402B-A239-5080D84D14AF}
 	EndGlobalSection
 EndGlobal
