@@ -25,7 +25,7 @@ task Rebuild -depends Clean {
     $solution = get-location;
 	exec { msbuild /nologo /v:minimal /t:rebuild /p:"Configuration=Release;OutDir=$bindir/Gnip.Client/;SolutionDir=$solution/" "Source/Gnip.Client/Gnip.Client.csproj" }
 	exec { msbuild /nologo /v:minimal /t:rebuild /p:"Configuration=Release;OutDir=$bindir/Gnip.Model/;SolutionDir=$solution/" "Source/Gnip.Model/Gnip.Model.csproj" }
-}
+	exec { msbuild /nologo /v:minimal /t:rebuild /p:"Configuration=Release;OutDir=$bindir/NActivityStream/;SolutionDir=$solution/" "Source/NActivityStream/NActivityStream.csproj" }}
 
 
 task Create:Nuget -depends Rebuild,Check {
@@ -40,6 +40,11 @@ task Create:Nuget -depends Rebuild,Check {
     
     $version = ([System.Diagnostics.FileVersionInfo]::GetVersionInfo("$bindir\Gnip.Model\Gnip.Model.dll").productVersion);
     ..\..\.NuGet\NuGet.exe pack "Gnip.Model.nuspec" /version "$version"
+	
+	copy "$location/NActivityStream.nuspec" $bindir
+    
+    $version = ([System.Diagnostics.FileVersionInfo]::GetVersionInfo("$bindir\NActivityStream\NActivityStream.dll").productVersion);
+    ..\..\.NuGet\NuGet.exe pack "NActivityStream.nuspec" /version "$version"
     
     pop-location
 }

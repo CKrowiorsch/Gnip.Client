@@ -80,6 +80,7 @@
     <Compile Include="IGnipRulesRepository.cs" />
     <Compile Include="IHttpStreaming.cs" />
     <Compile Include="Impl\GnipReplayReader.cs" />
+    <Compile Include="Impl\GnipTwitterWebRequest.cs" />
     <Compile Include="Impl\GnipWebRequest.cs" />
     <Compile Include="Impl\HttpGnipRulesRepository.cs" />
     <Compile Include="IProcessEvents.cs" />
@@ -90,6 +91,9 @@
     <Compile Include="ReconnectableHttpStreaming.cs" />
     <Compile Include="ReplayActivityHttpStreaming.cs" />
     <Compile Include="ReplayAndObserveActivityStreaming.cs" />
+    <Compile Include="ReplayAndObserveTwitterStreaming.cs" />
+    <Compile Include="ReplayTwitterHttpStreaming.cs" />
+    <Compile Include="TwitterHttpStreaming.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -98,6 +102,10 @@
     <ProjectReference Include="..\Gnip.Model\Gnip.Model.csproj">
       <Project>{274f0e0d-01fa-46e9-92a2-904d2b1146a4}</Project>
       <Name>Gnip.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NActivityStream\NActivityStream.csproj">
+      <Project>{d3495131-f4f1-462a-bed5-de458545dfa6}</Project>
+      <Name>NActivityStream</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

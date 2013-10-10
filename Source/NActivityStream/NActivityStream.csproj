@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\NActivityStream.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\NActivityStream.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -44,9 +46,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +73,7 @@
     <Compile Include="Model\Gnip\Twitter\TwitterActivity.cs" />
     <Compile Include="Model\Gnip\Twitter\TwitterActor.cs" />
     <Compile Include="Model\Gnip\Twitter\TwitterEntities.cs" />
+    <Compile Include="Model\Gnip\Twitter\TwitterLocation.cs" />
     <Compile Include="Model\Gnip\Twitter\TwitterUrl.cs" />
     <Compile Include="Model\Link.cs" />
     <Compile Include="Model\MediaLink.cs" />

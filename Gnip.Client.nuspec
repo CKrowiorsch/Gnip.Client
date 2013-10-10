@@ -12,6 +12,7 @@
       <dependency id="NLog" version="[2.0.1.2,)" />
       <dependency id="Microsoft.AspNet.WebApi.Client" version="[4.0.30506.0,)" />
       <dependency id="Gnip.Model" version="[0.1.0,)" />
+	  <dependency id="NActivityStream" version="[0.1.0,)" />
       <dependency id="C5" version="[2.2.4881.16939,)" />
     </dependencies>
   </metadata>
