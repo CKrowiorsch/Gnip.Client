@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>NActivityStream</id>
+    <version>0.0.1</version>
+    <authors>Christian Krowiorsch</authors>
+    <description>C# Model für die Activitystreamspec</description>
+    <language>de-DE</language>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="[5.0.6,)" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="NActivityStream\NActivityStream.dll" target="lib" />
+    <file src="NActivityStream\NActivityStream.xml" target="xml" />
+  </files>
+</package>
