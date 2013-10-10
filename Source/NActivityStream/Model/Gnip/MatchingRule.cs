@@ -4,6 +4,6 @@
     {
         public string Value { get; set; }
 
-        public object Tag { get; set; }
+        public string Tag { get; set; }
     }
 }

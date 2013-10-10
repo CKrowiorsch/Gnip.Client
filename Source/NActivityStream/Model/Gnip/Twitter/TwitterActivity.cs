@@ -11,7 +11,6 @@ namespace Krowiorsch.Model.Gnip.Twitter
         
         public int RetweetCount { get; set; }
 
-
         [JsonProperty("twitter_filter_level")]
         public string TwitterFilterLevel { get; set; }
 

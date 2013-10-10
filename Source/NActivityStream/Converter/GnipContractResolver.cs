@@ -40,7 +40,5 @@ namespace Krowiorsch.Converter
                 ? _remappedProperties[propertyName.ToLower()]
                 : base.ResolvePropertyName(propertyName);
         }
-
-
     }
 }

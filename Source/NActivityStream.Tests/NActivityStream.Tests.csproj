@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter\when_deserialize_gnip_facebook.cs" />
     <Compile Include="Converter\when_deserialize_gnip_twitter.cs" />
     <Compile Include="Converter\when_deserialize_minimal_spec.cs" />
     <Compile Include="Converter\with_ActivityConvert.cs" />

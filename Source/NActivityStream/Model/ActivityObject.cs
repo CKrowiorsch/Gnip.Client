@@ -1,4 +1,8 @@
-﻿namespace Krowiorsch.Model
+﻿using Krowiorsch.Converter;
+
+using Newtonsoft.Json;
+
+namespace Krowiorsch.Model
 {
     public class ActivityObject
     {
@@ -18,6 +22,7 @@
         public string DisplayName { get; set; }
 
         /// <summary> Description of a resource providing a visual representation of the object, intended for human consumption. </summary>
-        public string Image { get; set; }
+        [JsonConverter(typeof(MediaLinkConverter))]
+        public MediaLink Image { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Krowiorsch.Model;
 
@@ -10,11 +11,17 @@ namespace Krowiorsch.Converter
         static readonly Dictionary<string, Type> Registry = new Dictionary<string, Type>
         {
             {"note", typeof(ActivityObjectNote)},
+            {"comment", typeof(ActivityObjectComment)}
         };
 
         public static Type GetByName(string objectType)
         {
-            return Registry[objectType];
+            var cleanedObjectType = objectType;
+
+            if (cleanedObjectType.StartsWith("http://activitystrea.ms"))
+                cleanedObjectType = new Uri(cleanedObjectType).Segments.Last();
+
+            return Registry.ContainsKey(cleanedObjectType) ? Registry[cleanedObjectType] : typeof(ActivityObject);
         }
     }
 }

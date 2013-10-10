@@ -1,5 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 
 using Krowiorsch.Model;
 
@@ -10,21 +12,25 @@ namespace Krowiorsch.Converter
 {
     class ActivityObjectConverter : JsonConverter
     {
-        Dictionary<string,Type> _mapping = new Dictionary<string, Type>()
-        {
-            {"note", typeof(ActivityObjectNote)}
-        }; 
-
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             serializer.ContractResolver = null;
 
             var commonObject = JObject.Load(reader);
 
-            if (_mapping.ContainsKey(commonObject["objectType"].ToString()))
-                return commonObject.ToObject(_mapping[commonObject["objectType"].ToString()], serializer);
+            var typeOfObjectActivity = ActivityObjectTypeResolver.GetByName(GetObjectTypeString(commonObject));
+            existingValue = commonObject.ToObject(typeOfObjectActivity, serializer);
 
-            return commonObject.ToObject<ActivityObject>();
+
+            // Set links
+            var links = ConvertLinks(commonObject);
+            var prop = existingValue.GetType().GetProperty("Links", BindingFlags.Public | BindingFlags.Instance);
+            if (null != prop && prop.CanWrite)
+            {
+                prop.SetValue(existingValue, links, null);
+            }
+
+            return existingValue;
         }
 
         public override bool CanConvert(Type objectType)
@@ -35,6 +41,46 @@ namespace Krowiorsch.Converter
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
+        }
+
+
+        Link[] ConvertLinks(JObject commonObject)
+        {
+            JToken token;
+
+            if (commonObject.TryGetValue("link", StringComparison.OrdinalIgnoreCase, out token))
+            {
+                if (token is JArray)
+                {
+                    return (token as JArray).Select(singleToken => new Link(singleToken["@href"].ToString()) { Relation = singleToken["@rel"].ToString(), Type = singleToken["@type"].ToString() }).ToArray();
+                }
+
+                if (token is JValue)
+                {
+                    return new[] { new Link(token.ToString()) };
+                }
+
+                return new[] { new Link(token["@href"].ToString()) { Relation = token["@rel"].ToString(), Type = token["@type"].ToString() } };
+            }
+
+            return null;
+        }
+
+        string GetObjectTypeString(JObject commonObject)
+        {
+            JToken token;
+
+            if (commonObject.TryGetValue("objectType", StringComparison.OrdinalIgnoreCase, out token))
+            {
+                return token.ToString();
+            }
+
+            if (commonObject.TryGetValue("object-type", StringComparison.OrdinalIgnoreCase, out token))
+            {
+                return token.ToString();
+            }
+
+            return string.Empty;
         }
     }
 }

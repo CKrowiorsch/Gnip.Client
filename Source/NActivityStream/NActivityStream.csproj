@@ -56,9 +56,15 @@
     <Compile Include="Converter\ActivityObjectTypeResolver.cs" />
     <Compile Include="Converter\GnipActivityConvert.cs" />
     <Compile Include="Converter\GnipContractResolver.cs" />
+    <Compile Include="Converter\GnipXmlContractResolver.cs" />
+    <Compile Include="Converter\Gnip\MatchingRulesConverter.cs" />
+    <Compile Include="Converter\MediaLinkConverter.cs" />
     <Compile Include="Model\Activity.cs" />
     <Compile Include="Model\ActivityObject.cs" />
+    <Compile Include="Model\ActivityObjectComment.cs" />
     <Compile Include="Model\ActivityObjectNote.cs" />
+    <Compile Include="Model\Gnip\Facebook\FacebookActivity.cs" />
+    <Compile Include="Model\Gnip\Facebook\FacebookAuthor.cs" />
     <Compile Include="Model\Gnip\Gnip.cs" />
     <Compile Include="Model\Gnip\GnipActivity.cs" />
     <Compile Include="Model\Gnip\GnipLanguage.cs" />
