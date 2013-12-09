@@ -14,7 +14,7 @@ namespace Krowiorsch.Converter
         readonly Dictionary<string, string> _remappedProperties = new Dictionary<string, string>
         {
             {"published", "postedTime"},
-            {"url", "link"}
+            {"url", "link"},
         };
 
         readonly Dictionary<string, Type> _remappedTypes = new Dictionary<string, Type>

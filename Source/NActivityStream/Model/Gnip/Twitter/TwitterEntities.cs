@@ -6,7 +6,7 @@ namespace Krowiorsch.Model.Gnip.Twitter
     {
         public Hash[] Hashtags { get; set; }
         
-        public string[] Symbols { get; set; }
+        public object[] Symbols { get; set; }
         
         public TwitterUrl[] Urls { get; set; }
     }

@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter\Specific\when_deserialize_specific_entity.cs" />
     <Compile Include="Converter\when_deserialize_gnip_facebook.cs" />
     <Compile Include="Converter\when_deserialize_gnip_twitter.cs" />
     <Compile Include="Converter\when_deserialize_minimal_spec.cs" />
@@ -59,6 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Samples\Gnip\Twitter\specific_entity.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Samples\Gnip\Twitter\Sample1.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

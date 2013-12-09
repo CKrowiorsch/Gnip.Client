@@ -1,0 +1,84 @@
+{
+	"id" : "tag:search.twitter.com,2005:397352542696251395",
+	"objectType" : "activity",
+	"actor" : {
+		"objectType" : "person",
+		"id" : "id:twitter.com:2166883278",
+		"link" : "http://www.twitter.com/August_Dustin",
+		"displayName" : "AugustDustin",
+		"postedTime" : "2013-10-31T16:23:31.000Z",
+		"image" : "https://abs.twimg.com/sticky/default_profile_images/default_profile_0_normal.png",
+		"summary" : null,
+		"links" : [{
+				"href" : null,
+				"rel" : "me"
+			}
+		],
+		"friendsCount" : 0,
+		"followersCount" : 1,
+		"listedCount" : 0,
+		"statusesCount" : 596,
+		"twitterTimeZone" : null,
+		"verified" : false,
+		"utcOffset" : null,
+		"preferredUsername" : "August_Dustin",
+		"languages" : ["en"],
+		"favoritesCount" : 0
+	},
+	"verb" : "post",
+	"postedTime" : "2013-11-04T13:20:03.000Z",
+	"generator" : {
+		"displayName" : "dlvr.it",
+		"link" : "http://dlvr.it"
+	},
+	"provider" : {
+		"objectType" : "service",
+		"displayName" : "Twitter",
+		"link" : "http://www.twitter.com"
+	},
+	"link" : "http://twitter.com/August_Dustin/statuses/397352542696251395",
+	"body" : "$AIRT Written-off! http://t.co/zLyk7NtPgJ",
+	"object" : {
+		"objectType" : "note",
+		"id" : "object:search.twitter.com,2005:397352542696251395",
+		"summary" : "$AIRT Written-off! http://t.co/zLyk7NtPgJ",
+		"link" : "http://twitter.com/August_Dustin/statuses/397352542696251395",
+		"postedTime" : "2013-11-04T13:20:03.000Z"
+	},
+	"favoritesCount" : 0,
+	"twitter_entities" : {
+		"hashtags" : [],
+		"symbols" : [{
+				"text" : "AIRT",
+				"indices" : [0, 5]
+			}
+		],
+		"urls" : [{
+				"url" : "http://t.co/zLyk7NtPgJ",
+				"expanded_url" : "http://top10stocks2buy.com/i.php?http://www.therailengineer.com/2013/11/04/written-off/",
+				"display_url" : "top10stocks2buy.com/i.php?http://w…",
+				"indices" : [19, 41]
+			}
+		],
+		"user_mentions" : []
+	},
+	"twitter_filter_level" : "medium",
+	"twitter_lang" : "en",
+	"retweetCount" : 0,
+	"gnip" : {
+		"matching_rules" : [{
+				"tag" : "LM129892"
+			}
+		],
+		"urls" : [{
+				"url" : "http://t.co/zLyk7NtPgJ",
+				"expanded_url" : "http://top10stocks2buy.com/i.php?http://www.therailengineer.com/2013/11/04/written-off/",
+				"expanded_status" : 200
+			}
+		],
+		"klout_score" : 10,
+		"language" : {
+			"value" : "de"
+		}
+	}
+}

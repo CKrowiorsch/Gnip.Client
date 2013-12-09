@@ -51,7 +51,11 @@ namespace Krowiorsch.Converter
         It should_have_object_of_type_note_with_link = () => 
             _result.As<TwitterActivity>().Object.As<ActivityObjectNote>().Link.ShouldEqual("http://twitter.com/AlexListen/statuses/379576600850755585");
 
+        It should_have_rules = () => _result.As<TwitterActivity>().Gnip.MatchingRules.ShouldNotBeNull();
 
+        It should_have_two_gnipUrls = () => _result.As<TwitterActivity>().Gnip.Urls.Count().ShouldEqual(2);
+
+        It should_have_expandedUrl = () => _result.As<TwitterActivity>().Gnip.Urls[0].ExpandedUrl.ShouldEqual("http://buketvpodolske.ru/tnt-mod-dlya-minecraft-1-0-0.html?utm_source=twitterfeed&utm_medium=twitter");
 
         static Activity _result;
     }

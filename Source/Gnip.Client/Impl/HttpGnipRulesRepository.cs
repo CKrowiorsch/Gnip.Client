@@ -47,14 +47,10 @@ namespace Krowiorsch.Gnip.Impl
                 {
                     if (!t.Result.IsSuccessStatusCode)
                     {
-                        Logger.Warn(string.Format("Addes Failed because of: {0}", t.Result.Content.ReadAsStringAsync().Result));
-                        //throw new InvalidOperationException(t.Result.ReasonPhrase);
+                        throw new InvalidOperationException(t.Result.Content.ReadAsStringAsync().Result);
                     }
-                    Logger.Info("added successful");
                 }).Wait();
         }
-
-
 
         public void DeleteByTag(string tag)
         {
