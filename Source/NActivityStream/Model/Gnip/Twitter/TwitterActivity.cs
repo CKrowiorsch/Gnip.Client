@@ -1,6 +1,4 @@
-﻿using System;
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Krowiorsch.Model.Gnip.Twitter
 {
@@ -18,5 +16,8 @@ namespace Krowiorsch.Model.Gnip.Twitter
 
         [JsonProperty("twitter_lang")]
         public string TwitterLanguage { get; set; }
+
+        [JsonProperty("body")]
+        public string Tweet { get; set; }
     }
 }

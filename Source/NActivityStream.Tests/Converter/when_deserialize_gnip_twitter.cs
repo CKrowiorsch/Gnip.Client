@@ -30,6 +30,8 @@ namespace Krowiorsch.Converter
 
         It should_have_an_url_from_link_property = () => _result.Url.ShouldEqual("http://twitter.com/AlexListen/statuses/379576600850755585");
 
+        It should_have_an_tweet = () => _result.As<TwitterActivity>().Tweet.ShouldEqual("tnt mod для minecraft 1 0 0: tnt mod для minecraft 1 0 0 http://t.co/l1B5bMQ69B http://t.co/72QVQzJje0");
+
         It should_have_a_provider = () => _result.Provider.ShouldNotBeNull();
 
         It should_have_a_provider_with_type_service = () => _result.Provider.ObjectType.ShouldEqual("service");

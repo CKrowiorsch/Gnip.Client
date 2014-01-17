@@ -62,6 +62,7 @@
     <Compile Include="Model\ActivityObject.cs" />
     <Compile Include="Model\ActivityObjectComment.cs" />
     <Compile Include="Model\ActivityObjectNote.cs" />
+    <Compile Include="Model\ActivityObjectActivity.cs" />
     <Compile Include="Model\Gnip\Facebook\FacebookActivity.cs" />
     <Compile Include="Model\Gnip\Facebook\FacebookAuthor.cs" />
     <Compile Include="Model\Gnip\Gnip.cs" />

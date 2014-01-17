@@ -11,7 +11,8 @@ namespace Krowiorsch.Converter
         static readonly Dictionary<string, Type> Registry = new Dictionary<string, Type>
         {
             {"note", typeof(ActivityObjectNote)},
-            {"comment", typeof(ActivityObjectComment)}
+            {"comment", typeof(ActivityObjectComment)},
+            {"activity", typeof(ActivityObjectActivity)}
         };
 
         public static Type GetByName(string objectType)

@@ -93,7 +93,7 @@
     <Compile Include="ReplayAndObserveActivityStreaming.cs" />
     <Compile Include="ReplayAndObserveTwitterStreaming.cs" />
     <Compile Include="ReplayTwitterHttpStreaming.cs" />
-    <Compile Include="TwitterHttpStreaming.cs" />
+    <Compile Include="ObserveTwitterHttpStreaming.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

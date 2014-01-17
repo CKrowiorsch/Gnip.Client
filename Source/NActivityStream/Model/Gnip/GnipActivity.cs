@@ -2,6 +2,6 @@
 {
     public class GnipActivity : Activity
     {
-         public Gnip Gnip { get; set; }
+        public Gnip Gnip { get; set; }
     }
 }
