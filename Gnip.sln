@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30324.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnip.Client", "Source\Gnip.Client\Gnip.Client.csproj", "{FC9ADC2D-3AE0-4719-914F-736F49068FFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnip.Client.Tests", "Source\Gnip.Client.Tests\Gnip.Client.Tests.csproj", "{7BA13A16-8FC7-4665-B27E-04078C6714EE}"
