@@ -32,7 +32,6 @@ namespace Krowiorsch.Gnip.Scenarios.ReplayStreamScenario
             var streaming = new ReplayActivityHttpStreaming(_streamingEndpoint, _gnipAccessToken, startDate);
 
             streaming.Stream.Subscribe(OnNewActivity);
-
             return streaming.ReadAsync().ContinueWith(t => Logger.Warn(string.Format("{0} Activities", _count)));
         }
 

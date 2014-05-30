@@ -15,15 +15,12 @@ namespace Krowiorsch.Gnip
         /// <summary>
         /// Created a stream, that start at a specific point and resume the with live events
         /// </summary>
-        /// <param name="endpoint"></param>
-        /// <param name="accessToken"></param>
-        /// <param name="startDate"></param>
-        public ReplayAndObserveTwitterStreaming(string endpoint, GnipAccessToken accessToken, DateTime startDate)
+        public ReplayAndObserveTwitterStreaming(string endpointReplay, string endpointObserve, GnipAccessToken accessToken, DateTime startDate)
         {
-            _replayStreaming = new ReplayTwitterHttpStreaming(endpoint, accessToken, startDate);
-            _observeActivityStreaming = new ObserveTwitterHttpStreaming(endpoint, accessToken);
+            _replayStreaming = new ReplayTwitterHttpStreaming(endpointReplay, accessToken, startDate);
+            _observeActivityStreaming = new ObserveTwitterHttpStreaming(endpointObserve, accessToken);
 
-            Endpoint = new Uri(endpoint);
+            Endpoint = new Uri(endpointReplay);
             Stream = _replayStreaming.Stream.Merge(_observeActivityStreaming.Stream);
         }
 
@@ -32,7 +29,7 @@ namespace Krowiorsch.Gnip
             await _replayStreaming.ReadAsync();
             await _observeActivityStreaming.ReadAsync();
         }
-
+        
         public void StopStreaming()
         {
             _replayStreaming.StopStreaming();

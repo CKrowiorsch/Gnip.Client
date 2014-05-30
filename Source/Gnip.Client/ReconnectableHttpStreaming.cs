@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Reactive.Subjects;
@@ -22,29 +21,24 @@ namespace Krowiorsch.Gnip
 
         readonly Subject<string> _internalSubject; 
 
-        /// <summary>
-        /// Stream of Lines from HttpStreaming
-        /// </summary>
+        /// <summary> Stream of Lines from HttpStreaming </summary>
         public IObservable<string> Stream { get; set; }
 
-        /// <summary>
-        /// Builder to create a WebRequest for this specific stream
-        /// </summary>
+        /// <summary> Builder to create a WebRequest for this specific stream </summary>
         protected Func<HttpWebRequest> _webRequestBuilder;
         
-        /// <summary>
-        /// Token to cancel request
-        /// </summary>
+        /// <summary> Token to cancel request </summary>
         protected CancellationTokenSource _cancellationTokenSource;
+
+        /// <summary> Count of reconnect </summary>
+        protected int ReconnectCount { get; set; }
+
+        protected int _currentReconnectCount;
 
         int _currentTimeout = 1000;
 
-        /// <summary>
-        /// Initializes the Streamin with endpoint and accesstoken
-        /// </summary>
-        /// <param name="streamingEndpoint"></param>
-        /// <param name="accessToken"></param>
-        public ReconnectableHttpStreaming(string streamingEndpoint, GnipAccessToken accessToken)
+        /// <summary> Initializes the Streamin with endpoint and accesstoken </summary>
+        public ReconnectableHttpStreaming(string streamingEndpoint, GnipAccessToken accessToken, int reconnectCount = 5)
         {
             Endpoint = new Uri(streamingEndpoint);
 
@@ -52,6 +46,8 @@ namespace Krowiorsch.Gnip
             _cancellationTokenSource = new CancellationTokenSource();
 
             Stream = _internalSubject = new Subject<string>();
+
+            ReconnectCount = _currentReconnectCount = reconnectCount;
         }
 
         /// <summary>
@@ -73,13 +69,18 @@ namespace Krowiorsch.Gnip
                             case ClientDisconnectReason.Exception:
                             case ClientDisconnectReason.RemoteDisconnect:
                             case ClientDisconnectReason.EndOfLine:
-                                if (_currentTimeout > 60000)
+
+                                _currentReconnectCount--;                   
+                            
+                                if (_currentReconnectCount <= 0)
                                     return;
 
                                 Thread.Sleep(_currentTimeout);
                                 _currentTimeout *= 2;
                                 continue;
                             case ClientDisconnectReason.TaskCancel:
+                                return;
+                            case ClientDisconnectReason.Success:
                                 return;
                         }
                     }
@@ -112,8 +113,12 @@ namespace Krowiorsch.Gnip
                             return ClientDisconnectReason.TaskCancel;
                         }
 
-                        if (!string.IsNullOrEmpty(line))
+                        if(!string.IsNullOrEmpty(line))
+                        {
+                            _currentReconnectCount = ReconnectCount;
                             _internalSubject.OnNext(line);
+                        }
+                            
                     }
                 }
                 catch (IOException e)

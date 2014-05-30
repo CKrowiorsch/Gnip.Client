@@ -19,5 +19,7 @@
         public string[] Languages { get; set; }
 
         public string Link { get; set; }
+
+        public string PreferredUsername { get; set; }
     }
 }

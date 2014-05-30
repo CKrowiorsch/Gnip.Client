@@ -74,6 +74,9 @@
     <Compile Include="Scenarios\ReplayStreamScenario\Scenario.cs" />
     <Compile Include="Scenarios\RulesScenario\Scenario.cs" />
     <Compile Include="Scenarios\SingleTypeScenario\Scenario.cs" />
+    <Compile Include="Scenarios\TwitterObserveScenario\Scenario.cs" />
+    <Compile Include="Scenarios\TwitterReplayAndObserveScenario\Scenario.cs" />
+    <Compile Include="Scenarios\TwitterReplayScenario\Scenario.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -92,6 +95,10 @@
     <ProjectReference Include="..\Gnip.Model\Gnip.Model.csproj">
       <Project>{274f0e0d-01fa-46e9-92a2-904d2b1146a4}</Project>
       <Name>Gnip.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NActivityStream\NActivityStream.csproj">
+      <Project>{d3495131-f4f1-462a-bed5-de458545dfa6}</Project>
+      <Name>NActivityStream</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

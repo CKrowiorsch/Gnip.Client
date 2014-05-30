@@ -7,6 +7,7 @@ using Krowiorsch.Model.Gnip.Facebook;
 using Krowiorsch.Model.Gnip.Twitter;
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Krowiorsch.Converter
 {
@@ -21,6 +22,13 @@ namespace Krowiorsch.Converter
             };
 
             return FromJson(jsonString, settings);
+        }
+
+        /// <summary> detects, if there is an activity in the string </summary>
+        public static bool IsActivity(string jsonString)
+        {
+            var o = JObject.Parse(jsonString);
+            return o["objectType"] != null;
         }
 
         public static Activity FromXml(string xmlString)
