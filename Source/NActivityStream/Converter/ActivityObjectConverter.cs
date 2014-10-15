@@ -40,9 +40,9 @@ namespace Krowiorsch.Converter
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            var t = JToken.FromObject(value);
+            t.WriteTo(writer);
         }
-
 
         Link[] ConvertLinks(JObject commonObject)
         {

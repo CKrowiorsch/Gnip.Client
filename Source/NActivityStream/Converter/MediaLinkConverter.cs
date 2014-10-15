@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using Krowiorsch.Model;
 
@@ -11,7 +13,7 @@ namespace Krowiorsch.Converter
     {
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if(reader.TokenType == JsonToken.String)
+            if (reader.TokenType == JsonToken.String)
                 existingValue = new MediaLink() { Url = reader.Value.ToString() };
             else
                 existingValue = JObject.Load(reader).ToObject<MediaLink>();
@@ -26,7 +28,18 @@ namespace Krowiorsch.Converter
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            JToken t = JToken.FromObject(value);
+
+            if(t.Type != JTokenType.Object)
+            {
+                t.WriteTo(writer);
+            }
+            else
+            {
+                t.WriteTo(writer);
+            }
+
+            
         }
     }
 }

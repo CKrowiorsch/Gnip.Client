@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -26,11 +27,14 @@ namespace Krowiorsch.Gnip.Scenarios.MultipleStreamScenario
 
         public Task Start()
         {
-            var streams = _streamingEndpoints.Select(s => new ReconnectableHttpStreaming(s, _gnipAccessToken)).ToArray();
+            //var streams = _streamingEndpoints.Select(s => new ReconnectableHttpStreaming(s, _gnipAccessToken)).ToArray();
+            var streams = _streamingEndpoints.Select(s => new ReplayAndObserveActivityStreaming(s, _gnipAccessToken, DateTime.Now.AddMinutes(-20))).ToArray();
 
-            streams.Select(t => t.Stream.ToActivity())
+            streams.Select(t => t.Stream)
                 .Merge()
                 .Subscribe(OnNewActivity);
+
+            streams.ElementAt(0).Processing.Subscribe(i => Logger.Debug(i));
 
             return Task.WhenAll(streams.Select(s => s.ReadAsync()));
         }

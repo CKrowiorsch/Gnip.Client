@@ -15,6 +15,8 @@ using Krowiorsch.Gnip.Extensions;
 
 namespace Krowiorsch.Gnip
 {
+
+    /// <summary> replay of activities </summary>
     public class ReplayActivityHttpStreaming : IHttpStreaming<Activity>, IProcessEvents
     {
         readonly CancellationTokenSource _cancellationTokenSource;
@@ -28,9 +30,7 @@ namespace Krowiorsch.Gnip
         readonly Subject<Activity> _internalSubject;
         readonly Subject<ProcessingEventBase> _internalProcessing;
         
-        /// <summary>
-        /// Stream of activities
-        /// </summary>
+        /// <summary> Stream of activities </summary>
         public IObservable<Activity> Stream { get; set; }
 
         public ReplayActivityHttpStreaming(string endpoint, GnipAccessToken accessToken, DateTime startDate)
@@ -46,6 +46,7 @@ namespace Krowiorsch.Gnip
         }
         
 
+        /// <summary> starts async reading </summary>
         public Task ReadAsync()
         {
             return Task.Factory.StartNew(() =>
@@ -79,6 +80,7 @@ namespace Krowiorsch.Gnip
             });
         }
 
+        /// <summary> stop reading </summary>
         public void StopStreaming()
         {
             _cancellationTokenSource.Cancel();

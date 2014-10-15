@@ -32,13 +32,16 @@ namespace Krowiorsch.Gnip
 
         /// <summary> Count of reconnect </summary>
         protected int ReconnectCount { get; set; }
+        
+        /// <summary> der Initale Timeout </summary>
+        protected TimeSpan InitalTimeout { get; set; }
 
         protected int _currentReconnectCount;
 
-        int _currentTimeout = 1000;
+        TimeSpan _currentTimeout;
 
         /// <summary> Initializes the Streamin with endpoint and accesstoken </summary>
-        public ReconnectableHttpStreaming(string streamingEndpoint, GnipAccessToken accessToken, int reconnectCount = 5)
+        public ReconnectableHttpStreaming(string streamingEndpoint, GnipAccessToken accessToken, int reconnectCount = 8)
         {
             Endpoint = new Uri(streamingEndpoint);
 
@@ -48,6 +51,7 @@ namespace Krowiorsch.Gnip
             Stream = _internalSubject = new Subject<string>();
 
             ReconnectCount = _currentReconnectCount = reconnectCount;
+            InitalTimeout = _currentTimeout = TimeSpan.FromSeconds(1);
         }
 
         /// <summary>
@@ -62,7 +66,11 @@ namespace Krowiorsch.Gnip
                 {
                     while (true)
                     {
-                        var clientDisconnectReason = StartObserving(cancellationToken);
+                        var clientDisconnectReason = StartObserving(cancellationToken, () =>
+                        {
+                            _currentReconnectCount = ReconnectCount;
+                            _currentTimeout = InitalTimeout;
+                        });
 
                         switch (clientDisconnectReason)
                         {
@@ -70,14 +78,19 @@ namespace Krowiorsch.Gnip
                             case ClientDisconnectReason.RemoteDisconnect:
                             case ClientDisconnectReason.EndOfLine:
 
-                                _currentReconnectCount--;                   
-                            
-                                if (_currentReconnectCount <= 0)
-                                    return;
+                                _currentReconnectCount--;
 
+                                if(_currentReconnectCount <= 0)
+                                {
+                                    Logger.Warn("Stream reconnection failed ... abort");
+                                    return;
+                                }
+
+                                Logger.Info("Stream interrupted ... trying reconnection in {0} sec", _currentTimeout.TotalSeconds);
                                 Thread.Sleep(_currentTimeout);
-                                _currentTimeout *= 2;
+                                _currentTimeout = _currentTimeout.Add(_currentTimeout);         // increase timeout 
                                 continue;
+
                             case ClientDisconnectReason.TaskCancel:
                                 return;
                             case ClientDisconnectReason.Success:
@@ -88,12 +101,14 @@ namespace Krowiorsch.Gnip
                 cancellationToken);
         }
 
+        /// <summary> cancels streaming </summary>
         public void StopStreaming()
         {
             _cancellationTokenSource.Cancel();
         }
 
-        protected virtual ClientDisconnectReason StartObserving(CancellationToken cancellationToken)
+        /// <summary> Observe the Stream </summary>
+        protected virtual ClientDisconnectReason StartObserving(CancellationToken cancellationToken, Action onRead)
         {
             using (var response = _webRequestBuilder().GetResponse())
             using (var reponseStream = response.GetResponseStream())
@@ -105,8 +120,6 @@ namespace Krowiorsch.Gnip
                     {
                         var line = reader.ReadLine();
 
-                        _currentTimeout = 1000;
-
                         if (cancellationToken.IsCancellationRequested)
                         {
                             Logger.Info("Gnip Client Canceled");
@@ -116,6 +129,10 @@ namespace Krowiorsch.Gnip
                         if(!string.IsNullOrEmpty(line))
                         {
                             _currentReconnectCount = ReconnectCount;
+
+                            if(onRead != null)
+                                onRead();
+
                             _internalSubject.OnNext(line);
                         }
                             

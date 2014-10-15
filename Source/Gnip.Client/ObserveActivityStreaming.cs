@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Threading.Tasks;
 
 using Krowiorsch.Gnip.Events;
 using Krowiorsch.Gnip.Model;
@@ -25,7 +26,6 @@ namespace Krowiorsch.Gnip
         public ObserveActivityStreaming(string streamingEndpoint, GnipAccessToken accessToken)
             : base(streamingEndpoint, accessToken)
         {
-            Endpoint = new Uri(streamingEndpoint);
             Stream = base.Stream
                 .ToActivity()
                 .Select(a => 
@@ -37,15 +37,14 @@ namespace Krowiorsch.Gnip
             Processing = _internalProcessing = new Subject<ProcessingEventBase>();
         }
 
-        /// <summary>
-        /// stream of activities
-        /// </summary>
-        public IObservable<Activity> Stream { get; set; }
+        public Task ReadAsync()
+        {
+            _internalProcessing.OnNext(new ObserverGoingLive {StreamId = Endpoint.AbsoluteUri});
+            return base.ReadAsync();
+        }
 
-        /// <summary>
-        /// Endoint
-        /// </summary>
-        public Uri Endpoint { get; private set; }
+        /// <summary> stream of activities  </summary>
+        public IObservable<Activity> Stream { get; set; }
 
         public IObservable<ProcessingEventBase> Processing { get; private set; }
     }
