@@ -16,7 +16,7 @@ namespace Krowiorsch.Gnip.Converter
             _result = ActivityConvert.Deserialize(XmlSamplesProvider.GetImageFromInstagram());
 
         It should_be_a_Image = () =>
-            _result.ShouldBeOfType<ActivityImage>();
+            _result.ShouldBeAssignableTo<ActivityImage>();
 
         It should_have_content = () => 
             ((ActivityImage)_result).ImageContent.ShouldEqual("Old school meet new school... #Neymar #Kaka #Brazil #football");

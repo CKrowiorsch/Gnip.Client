@@ -1,0 +1,54 @@
+﻿<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:georss="http://www.georss.org/georss" xmlns:gnip="http://www.gnip.com/schemas/2010" xmlns:atommedia="http://purl.org/syndication/atommedia">
+  <id>756513472071755323_365382200</id>
+  <published>2014-07-03T16:04:15Z</published>
+  <updated>2014-07-03T16:04:15Z</updated>
+  <title>yourfone.de posted a video to Instagram</title>
+  <category term="VideoPosted" label="Video Posted"/>
+  <link rel="alternate" type="text/html" href="http://instagram.com/p/p_rP6iomY7/"/>
+  <source>
+    <link rel="self" type="application/json" href="https://api.instagram.com/v1/tags/yourfone/media/recent?client_id=e46b8b679f7648fb9874c98d0377baf6"/>
+    <title>Instagram - Recently Tagged - yourfone</title>
+    <updated>2014-10-15T13-23-25Z</updated>
+    <gnip:rule>yourfone</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Instagram</name>
+    <uri>www.Instagram.com</uri>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/video</activity:object-type>
+    <id>756513472071755323_365382200</id>
+    <content>Tom im Sonnenuntergang... immer noch ohne seine Julia. Hilf unserem Pärchen sich wiederzusehen: auf www.yourfone.de/holi #holicalling #holifestival #holifestivalofcolours #holifestival2014 #berlin #holi #holifestivalberlin #yourfone #summer #music #goodafternoon #sunset #festival</content>
+    <link rel="alternate" type="text/html" href="http://instagram.com/p/p_rP6iomY7/"/>
+    <link rel="preview" href="http://scontent-b.cdninstagram.com/hphotos-xpa1/t51.2885-15/1530632_542566379199289_1665436515_s.jpg"/>
+    <link rel="enclosure" href="http://scontent-a.cdninstagram.com/hphotos-xpa1/t50.2886-16/10522958_493599950774625_1277789658_n.mp4"/>
+    <category term="summer"/>
+    <category term="holifestival"/>
+    <category term="festival"/>
+    <category term="holifestivalofcolours"/>
+    <category term="holifestival2014"/>
+    <category term="goodafternoon"/>
+    <category term="berlin"/>
+    <category term="music"/>
+    <category term="holi"/>
+    <category term="holicalling"/>
+    <category term="yourfone"/>
+    <category term="holifestivalberlin"/>
+    <category term="sunset"/>
+    <gnip:statistics favoriteCount="23"/>
+  </activity:object>
+  <author>
+    <name>yourfone.de</name>
+    <uri>http://www.instagram.com/yourfone</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="text/html" length="0" href="http://www.instagram.com/yourfone"/>
+    <link rel="avatar" href="http://photos-b.ak.instagram.com/hphotos-ak-xap1/10467921_480793712066257_715523783_a.jpg"/>
+    <id>365382200</id>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">yourfone</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
