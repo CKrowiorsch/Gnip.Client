@@ -2,12 +2,16 @@
 
 namespace Krowiorsch.Gnip.Model.Data
 {
+    /// <summary> Baseclass for all activities </summary>
     public class Activity
     {
+        /// <summary> unique identifier </summary>
         public string Id { get; set; }
 
+        /// <summary> publishingDate </summary>
         public DateTime Published { get; set; }
         
+        /// <summary> Date of last Update </summary>
         public DateTime Updated { get; set; }
         
         public DateTime Created { get; set; }

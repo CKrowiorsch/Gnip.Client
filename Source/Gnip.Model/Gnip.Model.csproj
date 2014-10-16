@@ -49,6 +49,7 @@
     <Compile Include="Data\Activity.cs" />
     <Compile Include="Data\ActivityBookmark.cs" />
     <Compile Include="Data\ActivityComment.cs" />
+    <Compile Include="Data\ActivityImage.cs" />
     <Compile Include="Data\ActivityMusic.cs" />
     <Compile Include="Data\ActivityNote.cs" />
     <Compile Include="Data\ActivityOffer.cs" />

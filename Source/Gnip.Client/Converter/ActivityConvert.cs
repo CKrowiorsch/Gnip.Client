@@ -53,6 +53,9 @@ namespace Krowiorsch.Gnip.Converter
                 if (type == typeof(ActivityMusic))
                     return DeserializeMusic(xmlDocument, namespaceManager);
 
+                if (type == typeof(ActivityImage))
+                    return DeserializeImage(xmlDocument, namespaceManager);
+
                 return DeserializeUnknown(xmlDocument, namespaceManager);
             }
             catch (Exception e)
@@ -152,6 +155,9 @@ namespace Krowiorsch.Gnip.Converter
             video.Related = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='related']/@href", namespaceManager).InnerTextOrEmpty();
             video.Preview = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='preview']/@href", namespaceManager).InnerTextOrEmpty();
 
+            video.Category = document.SelectNodesOrEmpty("atom:entry/activity:object/atom:category/@term", namespaceManager)
+                .OfType<XmlAttribute>().Select(t => t.ValueOrEmpty()).ToArray();
+
             return video;
         }
 
@@ -227,6 +233,24 @@ namespace Krowiorsch.Gnip.Converter
             return photo;
         }
 
+        static ActivityImage DeserializeImage(XmlDocument document, XmlNamespaceManager namespaceManager)
+        {
+            var image = new ActivityImage();
+            var root = image as Activity;
+
+            FillAtomFeedProperties(ref root, document, namespaceManager);
+
+            image.ImageContent = document.SelectSingleNode("atom:entry/activity:object/atom:content", namespaceManager).InnerTextOrEmpty();
+
+            image.HtmlViewLink = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='alternate']/@href", namespaceManager).InnerTextOrEmpty();
+            image.PreviewLink = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='preview']/@href", namespaceManager).InnerTextOrEmpty();
+            image.EnclosureLink = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='enclosure']/@href", namespaceManager).InnerTextOrEmpty();
+            image.Category = document.SelectNodesOrEmpty("atom:entry/activity:object/atom:category/@term", namespaceManager)
+                .OfType<XmlAttribute>().Select(t => t.ValueOrEmpty()).ToArray();
+
+            return image;
+        }
+
         static ActivityBookmark DeserializeBookmark(XmlDocument document, XmlNamespaceManager namespaceManager)
         {
             var bookmark = new ActivityBookmark();
@@ -255,9 +279,9 @@ namespace Krowiorsch.Gnip.Converter
             root.Id = document.SelectSingleNode("atom:entry/atom:id", namespaceManager).InnerTextOrEmpty();
             root.Title = document.SelectSingleNode("atom:entry/atom:title", namespaceManager).InnerTextOrEmpty();
             root.Link = document.SelectSingleNode("atom:entry/atom:link/@href", namespaceManager).ValueOrEmpty();
-            root.Created = DateTime.Parse(document.SelectSingleNode("atom:entry/atom:created", namespaceManager).InnerTextOrEmpty());
-            root.Published = DateTime.Parse(document.SelectSingleNode("atom:entry/atom:published", namespaceManager).InnerTextOrEmpty());
-            root.Updated = DateTime.Parse(document.SelectSingleNode("atom:entry/atom:updated", namespaceManager).InnerTextOrEmpty());
+            root.Created = document.SelectSingleNode("atom:entry/atom:created", namespaceManager).AsDateTimeOrDefault();
+            root.Published = document.SelectSingleNode("atom:entry/atom:published", namespaceManager).AsDateTime();
+            root.Updated = document.SelectSingleNode("atom:entry/atom:updated", namespaceManager).AsDateTime();
             root.ObjectTypeUri = document.SelectSingleNode("atom:entry/activity:object/activity:object-type", namespaceManager).InnerTextOrEmpty();
 
             root.Author = ReadAuthor(document, namespaceManager);

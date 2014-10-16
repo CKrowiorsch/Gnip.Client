@@ -69,6 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converter\when_reading_with_multipleRules.cs" />
+    <Compile Include="Converter\when_read_a_video_xml_stream_from_instragram.cs" />
+    <Compile Include="Converter\when_read_a_xml_stream_from_instragram.cs" />
     <Compile Include="Converter\when_read_a_xml_stream_with_unicode.cs">
       <DependentUpon>with_activityConvert.cs</DependentUpon>
     </Compile>
@@ -103,6 +105,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Samples\Note\Note1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Samples\Image\Image_Instagram01.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Samples\Video\Video_Instagram01.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

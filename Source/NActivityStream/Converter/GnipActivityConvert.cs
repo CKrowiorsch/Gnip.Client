@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Krowiorsch.Converter
 {
+    /// <summary> Convertiert Gnipdaten in Activities </summary>
     public class GnipActivityConvert
     {
         public static Activity FromJson(string jsonString)
@@ -33,7 +34,7 @@ namespace Krowiorsch.Converter
 
         public static Activity FromXml(string xmlString)
         {
-            XDocument document = XDocument.Load(new StringReader(xmlString));
+            var document = XDocument.Load(new StringReader(xmlString));
             
             // remove namespaces to flatten attributes
             document.Descendants().Attributes().Where(a => a.IsNamespaceDeclaration).Remove();

@@ -18,5 +18,8 @@
         public string Preview { get; set; }
 
         public string VideoTitle { get; set; }
+
+        /// <summary> category of the video </summary>
+        public string[] Category { get; set; }
     }
 }
