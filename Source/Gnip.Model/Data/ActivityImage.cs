@@ -24,6 +24,9 @@
         /// <summary> an Activity Streams Media Link to a "full-sized" representation of the image </summary>
         public string FullImage { get; set; }
 
+        /// <summary> Number of Likes in the Image </summary>
+        public int LikeCount { get; set; }
+
 
         public override string GetContent()
         {

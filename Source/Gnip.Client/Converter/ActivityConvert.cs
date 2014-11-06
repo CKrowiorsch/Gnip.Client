@@ -248,6 +248,9 @@ namespace Krowiorsch.Gnip.Converter
             image.Category = document.SelectNodesOrEmpty("atom:entry/activity:object/atom:category/@term", namespaceManager)
                 .OfType<XmlAttribute>().Select(t => t.ValueOrEmpty()).ToArray();
 
+            var likeCount = document.SelectSingleNode("atom:entry/activity:object/gnip:statistics/@favoriteCount", namespaceManager).ValueOrEmpty();
+            image.LikeCount = string.IsNullOrEmpty(likeCount) ? 0 : int.Parse(likeCount);
+
             return image;
         }
 
