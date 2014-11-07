@@ -23,6 +23,8 @@ namespace Krowiorsch.Gnip.Model.Data
         public string Link { get; set; }
 
         public EntryAuthor Author { get; set; }
+        
+        public EntryActor Actor { get; set; }
 
         public MatchingRule[] Rules { get; set; }
 

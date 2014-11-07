@@ -59,6 +59,7 @@
     <Compile Include="Data\ActivityVideo.cs" />
     <Compile Include="Data\EntryAuthor.cs" />
     <Compile Include="Data\MatchingRule.cs" />
+    <Compile Include="Data\EntryActor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rule.cs" />
     <Compile Include="Rules.cs" />

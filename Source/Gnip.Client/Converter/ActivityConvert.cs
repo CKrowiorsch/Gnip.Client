@@ -288,6 +288,7 @@ namespace Krowiorsch.Gnip.Converter
             root.ObjectTypeUri = document.SelectSingleNode("atom:entry/activity:object/activity:object-type", namespaceManager).InnerTextOrEmpty();
 
             root.Author = ReadAuthor(document, namespaceManager);
+            root.Actor = ReadActor(document, namespaceManager);
             root.Rules = ReadMatchingRule(document, namespaceManager);
 
             root.RawXml = document.OuterXml;
@@ -326,5 +327,14 @@ namespace Krowiorsch.Gnip.Converter
                 Link = document.SelectSingleNode("atom:entry/atom:author/atom:uri", namespaceManager).InnerTextOrEmpty()
             };
         }
+
+        static EntryActor ReadActor(XmlDocument document, XmlNamespaceManager namespaceManager)
+        {
+            return new EntryActor
+            {
+                Id = document.SelectSingleNode("atom:entry/activity:actor/atom:id", namespaceManager).AsInteger(),
+            };
+        }
+
     }
 }

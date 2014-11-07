@@ -19,14 +19,21 @@ namespace Krowiorsch.Gnip.Extensions
             if (node == null)
                 return default(DateTime);
 
-            return DateTime.TryParse(node.InnerText, out output) 
-                ? output 
-                : default( DateTime );
+            return DateTime.TryParse(node.InnerText, out output)
+                ? output
+                : default(DateTime);
         }
 
         internal static DateTime AsDateTime(this XmlNode node)
         {
             return DateTime.Parse(node.InnerText);
+        }
+
+
+        internal static int AsInteger(this XmlNode node)
+        {
+            int value;
+            return int.TryParse(node.InnerText, out value) ? value : default(int);
         }
 
         internal static string ValueOrEmpty(this XmlNode node)
