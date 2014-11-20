@@ -330,9 +330,14 @@ namespace Krowiorsch.Gnip.Converter
 
         static EntryActor ReadActor(XmlDocument document, XmlNamespaceManager namespaceManager)
         {
+            var actorNode = document.SelectSingleNode("atom:entry/activity:actor", namespaceManager);
+
+            if(actorNode == null)
+                return null;
+
             return new EntryActor
             {
-                Id = document.SelectSingleNode("atom:entry/activity:actor/atom:id", namespaceManager).AsInteger(),
+                Id = document.SelectSingleNode("atom:entry/activity:actor/atom:id", namespaceManager).InnerTextOrEmpty(),
             };
         }
 

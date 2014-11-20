@@ -9,7 +9,8 @@ namespace Krowiorsch.Gnip.Model.Data
             Statistics = new Dictionary<string, long>();
         }
 
-        public int Id { get; set; }
+        /// <summary></summary>
+        public string Id { get; set; }
 
         /// <summary> Statistics Informations </summary>
         public IDictionary<string, long> Statistics { get; set; }
