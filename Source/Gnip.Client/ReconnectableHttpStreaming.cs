@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Reactive.Subjects;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -118,7 +120,7 @@ namespace Krowiorsch.Gnip
                 {
                     while (!reader.EndOfStream)
                     {
-                        var line = reader.ReadLine();
+                        var line = reader.ReadLineAsync().Result;
 
                         if (cancellationToken.IsCancellationRequested)
                         {

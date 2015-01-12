@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 
 using Krowiorsch.Gnip.Model;
-
+using Krowiorsch.Model.Gnip.Twitter;
 using NLog;
 
 namespace Krowiorsch.Gnip.Scenarios.TwitterObserveScenario
@@ -33,7 +33,7 @@ namespace Krowiorsch.Gnip.Scenarios.TwitterObserveScenario
 
         void OnNewActivity(Krowiorsch.Model.Activity activity)
         {
-            Logger.Info("New Activity ... {0}", activity.Published.ToLocalTime());
+            Logger.Info("New Activity ... {0}", ((TwitterActivity)activity).Tweet);
             _count++;
         }
     }

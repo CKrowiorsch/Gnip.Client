@@ -17,7 +17,7 @@ namespace Krowiorsch.Gnip
         {
             const string FileToAccessToken = @"c:\Data\gnip_access.json";
             const string FileToAccessTokenTwitter = @"c:\Data\gnip_twitter_access.json";
-            const string FileToStreamingEndpoints = @"c:\Data\gnip_endpoint.json";
+            const string FileToStreamingEndpoints = @"c:\Data\gnip_twitter_endpoint.json";
 
             var accessToken = GnipAccessToken.FromJsonStream(new FileStream(FileToAccessToken, FileMode.Open));
             var twitterAccessToken = GnipAccessToken.FromJsonStream(new FileStream(FileToAccessTokenTwitter, FileMode.Open));
