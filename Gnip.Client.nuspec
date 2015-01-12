@@ -18,6 +18,5 @@
   </metadata>
   <files>
     <file src="gnip.client\Gnip.Client.dll" target="lib" />
-    <file src="gnip.client\Gnip.Client.xml" target="xml" />
   </files>
 </package>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reactive.Linq;
 using System.Threading.Tasks;
 
 using Krowiorsch.Gnip.Extensions;
@@ -27,7 +26,7 @@ namespace Krowiorsch.Gnip.Scenarios.ReplayStreamScenario
 
         public Task Start()
         {
-            DateTime startDate = DateTime.Today.AddDays(-2);
+            var startDate = DateTime.Today.AddDays(-2);
 
             var streaming = new ReplayActivityHttpStreaming(_streamingEndpoint, _gnipAccessToken, startDate);
 

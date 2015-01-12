@@ -22,10 +22,11 @@ task Clean {
 }
 
 task Rebuild -depends Clean {
+	.nuget/nuget.exe restore
     $solution = get-location;
-	exec { msbuild /nologo /v:minimal /t:rebuild /p:"Configuration=Release;OutDir=$bindir/Gnip.Client/;SolutionDir=$solution/" "Source/Gnip.Client/Gnip.Client.csproj" }
-	exec { msbuild /nologo /v:minimal /t:rebuild /p:"Configuration=Release;OutDir=$bindir/Gnip.Model/;SolutionDir=$solution/" "Source/Gnip.Model/Gnip.Model.csproj" }
-	exec { msbuild /nologo /v:minimal /t:rebuild /p:"Configuration=Release;OutDir=$bindir/NActivityStream/;SolutionDir=$solution/" "Source/NActivityStream/NActivityStream.csproj" }}
+	exec { msbuild /nologo /v:minimal /t:rebuild /p:"Configuration=Release;OutputPath=$bindir/Gnip.Client/;SolutionDir=$solution/" "Source/Gnip.Client/Gnip.Client.csproj" }
+	exec { msbuild /nologo /v:minimal /t:rebuild /p:"Configuration=Release;OutputPath=$bindir/Gnip.Model/;SolutionDir=$solution/" "Source/Gnip.Model/Gnip.Model.csproj" }
+	exec { msbuild /nologo /v:minimal /t:rebuild /p:"Configuration=Release;OutputPath=$bindir/NActivityStream/;SolutionDir=$solution/" "Source/NActivityStream/NActivityStream.csproj" }}
 
 
 task Create:Nuget -depends Rebuild,Check {

@@ -12,6 +12,5 @@
   </metadata>
   <files>
     <file src="NActivityStream\NActivityStream.dll" target="lib" />
-    <file src="NActivityStream\NActivityStream.xml" target="xml" />
   </files>
 </package>

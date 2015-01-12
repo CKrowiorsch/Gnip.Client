@@ -12,6 +12,5 @@
   </metadata>
   <files>
     <file src="gnip.model\Gnip.Model.dll" target="lib" />
-    <file src="gnip.model\Gnip.Model.xml" target="xml" />
   </files>
 </package>

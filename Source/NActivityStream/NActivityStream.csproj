@@ -39,9 +39,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -61,6 +61,7 @@
     <Compile Include="Model\Activity.cs" />
     <Compile Include="Model\ActivityObject.cs" />
     <Compile Include="Model\ActivityObjectComment.cs" />
+    <Compile Include="Model\ActivityObjectImage.cs" />
     <Compile Include="Model\ActivityObjectNote.cs" />
     <Compile Include="Model\ActivityObjectActivity.cs" />
     <Compile Include="Model\Gnip\Facebook\FacebookActivity.cs" />
