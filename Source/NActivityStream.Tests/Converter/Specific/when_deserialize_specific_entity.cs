@@ -1,4 +1,5 @@
 ﻿using Krowiorsch.Model;
+using Krowiorsch.Model.Gnip.Twitter;
 using Krowiorsch.Samples;
 
 using Machine.Specifications;
@@ -16,8 +17,14 @@ namespace Krowiorsch.Converter.Specific
         It should_converted = () => 
             _result.ShouldNotBeNull();
 
+        It should_have_type_twitter = () =>
+            _result.ShouldBeAssignableTo<TwitterActivity>();
+
         It should_have_a_id = () =>
             _result.Id.ShouldEqual("tag:search.twitter.com,2005:397352542696251395");
+
+        It should_have_a_tweetName = () =>
+            _result.As<TwitterActivity>().Tweet.ShouldEqual("$AIRT Written-off! http://t.co/zLyk7NtPgJ");
 
         static Activity _result;
     }
