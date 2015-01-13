@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
 using Krowiorsch.Model;
 
 using Newtonsoft.Json;
@@ -9,6 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Krowiorsch.Converter
 {
+    /// <summary> converts to mediaLink if appropiate  </summary>
     public class MediaLinkConverter : JsonConverter
     {
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -30,18 +28,8 @@ namespace Krowiorsch.Converter
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            JToken t = JToken.FromObject(value);
-
-            if (t.Type != JTokenType.Object)
-            {
-                t.WriteTo(writer);
-            }
-            else
-            {
-                t.WriteTo(writer);
-            }
-
-
+            var t = JToken.FromObject(value);
+            t.WriteTo(writer);
         }
     }
 }
