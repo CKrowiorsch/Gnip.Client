@@ -13,10 +13,12 @@ namespace Krowiorsch.Converter
     {
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.String)
-                existingValue = new MediaLink() { Url = reader.Value.ToString() };
-            else
-                existingValue = JObject.Load(reader).ToObject<MediaLink>();
+            if (reader.TokenType == JsonToken.Null)
+                return existingValue;
+
+            existingValue = reader.TokenType == JsonToken.String
+                ? new MediaLink { Url = reader.Value.ToString() }
+                : JObject.Load(reader).ToObject<MediaLink>();
 
             return existingValue;
         }
@@ -30,7 +32,7 @@ namespace Krowiorsch.Converter
         {
             JToken t = JToken.FromObject(value);
 
-            if(t.Type != JTokenType.Object)
+            if (t.Type != JTokenType.Object)
             {
                 t.WriteTo(writer);
             }
@@ -39,7 +41,7 @@ namespace Krowiorsch.Converter
                 t.WriteTo(writer);
             }
 
-            
+
         }
     }
 }
