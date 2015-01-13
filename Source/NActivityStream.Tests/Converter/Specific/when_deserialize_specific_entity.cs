@@ -16,6 +16,9 @@ namespace Krowiorsch.Converter.Specific
         It should_converted = () => 
             _result.ShouldNotBeNull();
 
+        It should_have_a_id = () =>
+            _result.Id.ShouldEqual("tag:search.twitter.com,2005:397352542696251395");
+
         static Activity _result;
     }
 }
