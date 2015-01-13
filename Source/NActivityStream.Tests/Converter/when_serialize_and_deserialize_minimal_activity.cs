@@ -6,8 +6,6 @@ using Machine.Specifications;
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
 
-
-
 namespace Krowiorsch.Converter
 {
     public class when_serialize_and_deserialize_minimal_activity : with_ActivityConvert
@@ -23,7 +21,6 @@ namespace Krowiorsch.Converter
 
         It should_have_the_same_Content = () =>
             _dumpAndLoadedActivity.Content.ShouldEqual(_activity.Content);
-
 
         static Activity _activity;
 
