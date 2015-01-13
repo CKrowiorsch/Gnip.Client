@@ -47,7 +47,6 @@ namespace Krowiorsch.Gnip.Extensions
                 });
         }
 
-
         public static IObservable<Activity> ToActivity(this IObservable<string> input)
         {
             return input
