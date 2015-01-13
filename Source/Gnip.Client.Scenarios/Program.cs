@@ -26,6 +26,8 @@ namespace Krowiorsch.Gnip
             Logger.Info(string.Format("Use AccessToken: Username:{0} Password:{1}", accessToken.Username, accessToken.Password));
             Logger.Info(string.Format("Use Endpoint: {0}", streamingEndpoint[0]));
 
+            new Scenarios.InstagramScenario.Scenario(accessToken, new[] {"https://landaumedia1.gnip.com/data_collectors/4"}).Start();
+
             Console.ReadLine();
         }
     }

@@ -26,13 +26,19 @@ namespace Krowiorsch.Gnip
         public ObserveActivityStreaming(string streamingEndpoint, GnipAccessToken accessToken)
             : base(streamingEndpoint, accessToken)
         {
-            Stream = base.Stream
-                .ToActivity()
+            Stream = base.Stream.ToActivityOrNull()
                 .Select(a => 
                 {
+                    if(a == null)
+                    {
+                        _internalProcessing.OnNext(new FailedDeserialization());        // show error
+                        return null;
+                    }
+
                     a.Received = DateTime.Now;              // set received to Now
                     return a;
-                });
+                })
+                .Where(a => a != null);         // filter erroractivities
 
             Processing = _internalProcessing = new Subject<ProcessingEventBase>();
         }

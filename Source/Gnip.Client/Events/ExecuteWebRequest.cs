@@ -16,6 +16,11 @@ namespace Krowiorsch.Gnip.Events
         public Uri Url { get; set; }
     }
 
+    /// <summary>  DeserializationFailed  </summary>
+    public class FailedDeserialization : ProcessingEventBase
+    {
+    }
+
     /// <summary>  an Observer going in live state </summary>
     public class ObserverGoingLive : ProcessingEventBase
     {
