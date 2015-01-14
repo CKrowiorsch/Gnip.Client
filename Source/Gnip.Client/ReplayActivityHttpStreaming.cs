@@ -61,7 +61,7 @@ namespace Krowiorsch.Gnip
                         OnExecuteRequest = request => _internalProcessing.OnNext(new ExecuteWebRequest { Url = request.RequestUri })
                     };
 
-                    activities = reader.ReadLines().ToActivityOrNull().Where(a => a != null).ToArray();
+                    activities = reader.ReadLines().ToActivityOrNull().Where(a => a != null).OrderBy(t => t.Published).ToArray();
 
                     var newIds = new List<string>();
 
