@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 
 using Krowiorsch.Gnip.Model;
@@ -26,12 +27,19 @@ namespace Krowiorsch.Gnip.Scenarios.TwitterReplayScenario
         {
             DateTime startDate = DateTime.Now.AddMinutes(-31).ToUniversalTime();
 
-            var streaming = new ReplayTwitterHttpStreaming(_streamingEndpoint, _gnipAccessToken, startDate);
+            var streaming = new ReplayTwitterHttpStreaming(_streamingEndpoint, _gnipAccessToken, new DateTime(2015, 3, 2, 10, 00, 00));
 
-            streaming.Stream.Subscribe(OnNewActivity);
-            //streaming.StreamRaw.Subscribe(s => OnNewLine(s));
+            //streaming.Stream.Subscribe(OnNewActivity);
+            streaming.StreamRaw
+                .Where(t => t.Contains("Frühstadium"))
+                .Subscribe(s => OnNewLine(s));
 
             return streaming.ReadAsync().ContinueWith(t => Logger.WarnException("Stream aborted", t.Exception));
+        }
+
+        void OnNewLine(string s)
+        {
+            Logger.Debug(s);
         }
 
         void OnNewActivity(Krowiorsch.Model.Activity activity)
