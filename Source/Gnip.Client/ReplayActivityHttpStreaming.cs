@@ -25,7 +25,7 @@ namespace Krowiorsch.Gnip
 
         readonly SortedArray<string> _idsAlreadySeen = new SortedArray<string>();
 
-        readonly DateTime _startDate;
+        DateTime _startDate;
         DateTime _stopDate;
         readonly Subject<Activity> _internalSubject;
         readonly Subject<ProcessingEventBase> _internalProcessing;
@@ -71,7 +71,7 @@ namespace Krowiorsch.Gnip
 
                         _internalSubject.OnNext(activity);
                         newIds.Add(activity.Id);
-                        _stopDate = activity.Published;
+                        _startDate = activity.Published;
                     }
 
                     _idsAlreadySeen.AddAll(newIds);
