@@ -65,7 +65,7 @@ namespace Krowiorsch.Gnip.Impl
             if (resultCode == HttpStatusCode.Created)
                 return;
 
-            throw new InvalidOperationException(string.Format("AddRules, returned an HTTP Status Code  {0}", resultCode));
+            throw new InvalidOperationException(string.Format("AddRules, returned an HTTP Status Code  {0} \r\n{1}", resultCode, responseString));
         }
 
         public void Delete(Rule[] rules)
