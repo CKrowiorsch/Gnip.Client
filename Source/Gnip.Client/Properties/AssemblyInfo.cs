@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-
 [assembly: AssemblyTitle("Gnip.Client")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
@@ -10,5 +9,5 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("1e7fa821-ab8b-4125-8dc8-529bd0b4a90e")]
 
-[assembly: AssemblyVersion("0.7.2")]
-[assembly: AssemblyFileVersion("0.7.2")]
+[assembly: AssemblyVersion("0.7.3")]
+[assembly: AssemblyFileVersion("0.7.3")]
