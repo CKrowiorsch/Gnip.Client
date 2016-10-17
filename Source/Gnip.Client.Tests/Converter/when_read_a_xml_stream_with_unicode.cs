@@ -15,7 +15,7 @@ namespace Krowiorsch.Gnip.Converter
             _result = ActivityConvert.Deserialize(XmlSamplesProvider.GetCommentWithMultipleRules());
 
         It should_be_a_Note = () =>
-            _result.ShouldBeOfType<ActivityComment>();
+            _result.ShouldBeAssignableTo<ActivityComment>();
 
         It should_have_two_rules = () => 
             _result.Rules.Length.ShouldEqual(2);

@@ -16,7 +16,7 @@ namespace Krowiorsch.Gnip.Converter
             _result = ActivityConvert.Deserialize(XmlSamplesProvider.GetVideoFromInstagram());
 
         It should_be_a_Image = () =>
-            _result.ShouldBeOfType<ActivityVideo>();
+            _result.ShouldBeAssignableTo<ActivityVideo>();
 
         It should_have_video_content = () =>
             ((ActivityVideo)_result).VideoContent.ShouldEqual(@"Tom im Sonnenuntergang... immer noch ohne seine Julia. Hilf unserem Pärchen sich wiederzusehen: auf www.yourfone.de/holi #holicalling #holifestival #holifestivalofcolours #holifestival2014 #berlin #holi #holifestivalberlin #yourfone #summer #music #goodafternoon #sunset #festival");
