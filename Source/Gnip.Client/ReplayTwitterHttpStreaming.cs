@@ -33,7 +33,7 @@ namespace Krowiorsch.Gnip
             StreamRaw = base.Stream;
         }
 
-        public IObservable<Activity> Stream { get; set; }
+        public new IObservable<Activity> Stream { get; set; }
         
         public IObservable<string> StreamRaw { get; set; }
     }

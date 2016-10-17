@@ -17,6 +17,6 @@ namespace Krowiorsch.Gnip
             Stream = base.Stream.Select(GnipActivityConvert.FromJson);
         }
 
-        public IObservable<Activity> Stream { get; set; }
+        public new IObservable<Activity> Stream { get; set; }
     }
 }
