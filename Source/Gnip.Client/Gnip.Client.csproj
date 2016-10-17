@@ -98,7 +98,6 @@
     <Compile Include="ReconnectableHttpStreaming.cs" />
     <Compile Include="ReplayActivityHttpStreaming.cs" />
     <Compile Include="ReplayAndObserveActivityStreaming.cs" />
-    <Compile Include="ReplayAndObserveTwitterStreaming.cs" />
     <Compile Include="ReplayTwitterHttpStreaming.cs" />
     <Compile Include="ObserveTwitterHttpStreaming.cs" />
   </ItemGroup>
