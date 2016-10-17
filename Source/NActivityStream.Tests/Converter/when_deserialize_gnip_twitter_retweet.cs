@@ -18,7 +18,7 @@ namespace Krowiorsch.Converter
         Because of = () =>
             _result = GnipActivityConvert.FromJson(SamplesProvider.GnipTwitter.GetGnipTwitterShare());
 
-        It should_be_of_type_TwitterActivity = () => _result.ShouldBeOfType<TwitterActivity>();
+        It should_be_of_type_TwitterActivity = () => _result.ShouldBeAssignableTo<TwitterActivity>();
 
         It should_have_an_id = () => _result.Id.ShouldEqual("tag:search.twitter.com,2005:424141963890528256");
 
@@ -38,7 +38,7 @@ namespace Krowiorsch.Converter
         
         It should_have_a_provider_with_name_twitter = () => _result.Provider.DisplayName.ShouldEqual("Twitter");
 
-        It should_have_an_actor_of_type_gnipActor = () => _result.Actor.ShouldBeOfType<TwitterActor>();
+        It should_have_an_actor_of_type_gnipActor = () => _result.Actor.ShouldBeAssignableTo<TwitterActor>();
 
         It should_have_an_TwitterActor_with_friendsCount_of_248 = () => _result.Actor.As<TwitterActor>().FriendsCount.ShouldEqual(248);
 
@@ -48,7 +48,7 @@ namespace Krowiorsch.Converter
 
         It should_have_the_language_de = () => _result.As<TwitterActivity>().Gnip.Language.Value.ShouldBeEqualIgnoringCase("de");
 
-        It should_have_objecrt_of_type_activity = () => _result.As<TwitterActivity>().Object.ShouldBeOfType<ActivityObjectActivity>();
+        It should_have_objecrt_of_type_activity = () => _result.As<TwitterActivity>().Object.ShouldBeAssignableTo<ActivityObjectActivity>();
 
         It should_have_object_of_type_activity_with_link = () => _result.As<TwitterActivity>().Object.As<ActivityObjectActivity>().Link.ShouldEqual("http://twitter.com/lebelge/statuses/423952828860997632");
 
