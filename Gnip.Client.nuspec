@@ -7,7 +7,7 @@
     <description>C# Client für den Zugriff auf Gnip</description>
     <language>de-DE</language>
     <dependencies>
-      <dependency id="Newtonsoft.Json" version="[5.0.6,)" />
+      <dependency id="Newtonsoft.Json" version="[9.0.0,)" />
       <dependency id="Rx-Linq" version="[2.1.30214.0,)" />
       <dependency id="NLog" version="[2.0.1.2,)" />
       <dependency id="Microsoft.AspNet.WebApi.Client" version="[4.0.30506.0,)" />

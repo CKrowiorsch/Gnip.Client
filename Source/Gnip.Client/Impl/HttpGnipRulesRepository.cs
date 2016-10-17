@@ -3,34 +3,34 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-
+using Krowiorsch.Gnip.Extensions;
 using Krowiorsch.Gnip.Model;
-
-using NLog;
-
 using Newtonsoft.Json;
-
 using System.Linq;
 
 namespace Krowiorsch.Gnip.Impl
 {
     public class HttpGnipRulesRepository : IGnipRulesRepository, IDisposable
     {
-        static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         readonly HttpClient _client;
 
         readonly ICredentials _credentials;
         readonly string _baseUrl;
 
-        public HttpGnipRulesRepository(string baseUrl, GnipAccessToken accessToken)
+        readonly string _rulesEndpoint;
+        readonly GnipAccessToken _accessToken;
+
+        public HttpGnipRulesRepository(string rulesEndpoint, GnipAccessToken accessToken)
         {
-            _baseUrl = baseUrl;
-            _client = new HttpClient(new HttpClientHandler
-            {
-                PreAuthenticate = true,
-                AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip,
-                Credentials = _credentials = new NetworkCredential(accessToken.Username, accessToken.Password)
-            }) { BaseAddress = new Uri(baseUrl) };
+            //_client = new HttpClient(new HttpClientHandler
+            //{
+            //    PreAuthenticate = true,
+            //    AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip,
+            //    Credentials = _credentials = new NetworkCredential(accessToken.Username, accessToken.Password)
+            //}) { BaseAddress = new Uri(baseUrl) };
+
+            _rulesEndpoint = rulesEndpoint;
+            _accessToken = accessToken;
         }
 
         public void Clear()
@@ -99,8 +99,13 @@ namespace Krowiorsch.Gnip.Impl
 
         public Rule[] List()
         {
-            return _client.GetStringAsync("rules.json")
-                .ContinueWith(t => JsonConvert.DeserializeObject<Rules>(t.Result).List).Result;
+            string content;
+            var resultCode = Rest.GetRestResponse("Get", _rulesEndpoint, _accessToken.Username, _accessToken.Password, out content);
+
+            if (resultCode == HttpStatusCode.OK)
+                return JsonConvert.DeserializeObject<Rules>(content).List;
+            
+            throw new InvalidOperationException(string.Format("Invalid HttpCode: {0}", resultCode));
         }
 
         public string Endpoint
