@@ -34,7 +34,7 @@ namespace Krowiorsch.Gnip.Scenarios.TwitterReplayScenario
                 .Where(t => t.Contains("Frühstadium"))
                 .Subscribe(s => OnNewLine(s));
 
-            return streaming.ReadAsync().ContinueWith(t => Logger.WarnException("Stream aborted", t.Exception));
+            return streaming.ReadAsync().ContinueWith(t => Logger.Warn(t.Exception, "Stream aborted"));
         }
 
         void OnNewLine(string s)

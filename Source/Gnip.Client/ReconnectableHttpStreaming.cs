@@ -142,12 +142,12 @@ namespace Krowiorsch.Gnip
                 }
                 catch (IOException e)
                 {
-                    Logger.WarnException(string.Format("Fehler while reading: {0}", e.Message), e);
+                    Logger.Warn(e, string.Format("Fehler while reading: {0}", e.Message));
                     return ClientDisconnectReason.Exception;
                 }
                 catch (Exception e)
                 {
-                    Logger.WarnException(string.Format("Fehler while reading: {0}", e.Message), e);
+                    Logger.Warn(e, string.Format("Fehler while reading: {0}", e.Message));
                     return ClientDisconnectReason.Exception;
                 }
 

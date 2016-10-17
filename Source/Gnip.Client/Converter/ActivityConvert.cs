@@ -60,7 +60,7 @@ namespace Krowiorsch.Gnip.Converter
             }
             catch (Exception e)
             {
-                Logger.TraceException("Problem beim Convert", e);
+                Logger.Trace(e, "Problem beim Convert");
                 throw;
             }
 
