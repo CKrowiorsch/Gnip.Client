@@ -68,11 +68,6 @@ namespace Krowiorsch.Gnip.Impl
             throw new InvalidOperationException(string.Format("AddRules, returned an HTTP Status Code  {0}", resultCode));
         }
 
-        public void DeleteByTag(string tag)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Delete(Rule[] rules)
         {
             var deleteJson = JsonConvert.SerializeObject(new Rules(rules));
@@ -109,18 +104,6 @@ namespace Krowiorsch.Gnip.Impl
             {
                 return _rulesEndpoint;
             }
-        }
-
-        public HttpWebRequest BuildWebRequest(string url, ICredentials credentials)
-        {
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            request.Credentials = credentials;
-            request.PreAuthenticate = true;
-
-            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
-            request.Headers.Add("Accept-Encoding", "gzip");
-
-            return request;
         }
     }
 }

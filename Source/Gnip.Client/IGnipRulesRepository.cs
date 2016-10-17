@@ -12,8 +12,6 @@ namespace Krowiorsch.Gnip
 
         void Add(Rule[] rules);
 
-        void DeleteByTag(string tag);
-
         Rule[] List();
 
         string Endpoint { get; }
