@@ -45,7 +45,6 @@ namespace Krowiorsch.Converter
                 ContractResolver = new GnipXmlContractResolver(),
             };
 
-
             return JsonConvert.DeserializeObject<FacebookActivity>(json, settings);
         }
 
