@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 using Krowiorsch.Gnip.Extensions;
 using Krowiorsch.Gnip.Model;
@@ -10,25 +9,13 @@ using System.Linq;
 
 namespace Krowiorsch.Gnip.Impl
 {
-    public class HttpGnipRulesRepository : IGnipRulesRepository, IDisposable
+    public class HttpGnipRulesRepository : IGnipRulesRepository
     {
-        readonly HttpClient _client;
-
-        readonly ICredentials _credentials;
-        readonly string _baseUrl;
-
         readonly string _rulesEndpoint;
         readonly GnipAccessToken _accessToken;
 
         public HttpGnipRulesRepository(string rulesEndpoint, GnipAccessToken accessToken)
         {
-            //_client = new HttpClient(new HttpClientHandler
-            //{
-            //    PreAuthenticate = true,
-            //    AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip,
-            //    Credentials = _credentials = new NetworkCredential(accessToken.Username, accessToken.Password)
-            //}) { BaseAddress = new Uri(baseUrl) };
-
             _rulesEndpoint = rulesEndpoint;
             _accessToken = accessToken;
         }
@@ -39,68 +26,76 @@ namespace Krowiorsch.Gnip.Impl
             Delete(rules);
         }
 
-        /// <exception cref="InvalidOperationException"></exception>
         public void Add(Rule[] rules)
         {
-            _client.PostAsJsonAsync("rules.json", new Rules(rules))
-                .ContinueWith(t =>
+            // custom serializer to prevent the escaping of quotes on propertynames
+            var sb = new StringBuilder();
+            var sw = new StringWriter(sb);
+
+            using (JsonWriter jw = new JsonTextWriter(sw))
+            {
+                jw.WriteStartObject();
+                jw.WritePropertyName("rules", false);
+                jw.WriteStartArray();
+                foreach (var rule in rules)
                 {
-                    if (!t.Result.IsSuccessStatusCode)
-                    {
-                        throw new InvalidOperationException(t.Result.Content.ReadAsStringAsync().Result);
-                    }
-                }).Wait();
+                    jw.WriteStartObject();
+                    jw.WritePropertyName("value", false);
+                    jw.WriteValue(rule.Value);
+                    jw.WritePropertyName("tag", false);
+                    jw.WriteValue(rule.Tag);
+                    jw.WriteEndObject();
+                }
+
+                jw.WriteEndArray();
+                jw.WriteEndObject();
+            }
+
+            var addJson = sb.ToString();
+            string responseString;
+
+            var resultCode = Rest.GetRestResponse(
+                "POST",
+                _rulesEndpoint,
+                _accessToken.Username,
+                _accessToken.Password,
+                out responseString,
+                addJson);
+
+            if (resultCode == HttpStatusCode.Created)
+                return;
+
+            throw new InvalidOperationException(string.Format("AddRules, returned an HTTP Status Code  {0}", resultCode));
         }
 
         public void DeleteByTag(string tag)
         {
-            var rule = List().FirstOrDefault(t => !string.IsNullOrEmpty(t.Tag) && t.Tag.Equals(tag, StringComparison.OrdinalIgnoreCase));
-
-            if (rule == null)
-                throw new ArgumentException("rule does not exist");
-
-            var request = BuildWebRequest(_baseUrl + "rules.json", _credentials);
-            request.Method = "DELETE";
-            byte[] byteArray = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new Rules(rule)));
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = byteArray.Length;
-
-
-            Stream dataStream = request.GetRequestStream();
-            dataStream.Write(byteArray, 0, byteArray.Length);
-            dataStream.Close();
-
-            using (WebResponse response = request.GetResponse())
-            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-            {
-                string responseFromServer = reader.ReadToEnd();
-            }
+            throw new NotImplementedException();
         }
 
         public void Delete(Rule[] rules)
         {
-            var request = BuildWebRequest(_baseUrl + "/rules.json", _credentials);
-            request.Method = "DELETE";
-            byte[] byteArray = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new Rules(rules)));
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = byteArray.Length;
+            var deleteJson = JsonConvert.SerializeObject(new Rules(rules));
+            string responseString;
 
+            var resultCode = Rest.GetRestResponse(
+                       "POST",
+                       _rulesEndpoint + @"?_method=delete",
+                       _accessToken.Username,
+                       _accessToken.Password,
+                       out responseString,
+                       deleteJson);
 
-            Stream dataStream = request.GetRequestStream();
-            dataStream.Write(byteArray, 0, byteArray.Length);
-            dataStream.Close();
+            if (resultCode == HttpStatusCode.OK)
+                    return;
 
-            using (var response = request.GetResponse())
-            using (var reader = new StreamReader(response.GetResponseStream()))
-            {
-                string responseFromServer = reader.ReadToEnd();
-            }
+            throw new InvalidOperationException(string.Format("Invalid HttpCode: {0}", resultCode));
         }
 
         public Rule[] List()
         {
             string content;
-            var resultCode = Rest.GetRestResponse("Get", _rulesEndpoint, _accessToken.Username, _accessToken.Password, out content);
+            var resultCode = Rest.GetRestResponse("GET", _rulesEndpoint, _accessToken.Username, _accessToken.Password, out content);
 
             if (resultCode == HttpStatusCode.OK)
                 return JsonConvert.DeserializeObject<Rules>(content).List;
@@ -112,7 +107,7 @@ namespace Krowiorsch.Gnip.Impl
         {
             get
             {
-                return _baseUrl;
+                return _rulesEndpoint;
             }
         }
 
@@ -126,12 +121,6 @@ namespace Krowiorsch.Gnip.Impl
             request.Headers.Add("Accept-Encoding", "gzip");
 
             return request;
-        }
-
-        public void Dispose()
-        {
-            if (_client != null)
-                _client.Dispose();
         }
     }
 }
