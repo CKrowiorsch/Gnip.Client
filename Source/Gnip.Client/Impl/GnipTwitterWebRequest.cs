@@ -7,9 +7,15 @@ namespace Krowiorsch.Gnip.Impl
 {
     internal class GnipTwitterWebRequest
     {
-        public static HttpWebRequest Create(GnipAccessToken accessToken, string endpoint)
+        public static HttpWebRequest Create(GnipAccessToken accessToken, string endpoint, bool useMaxBackfile)
         {
-            var request = (HttpWebRequest)WebRequest.Create(endpoint);
+            var usedEndpoint = endpoint;
+
+            if (useMaxBackfile)
+                usedEndpoint += "?backfillMinutes=5";
+
+
+            var request = (HttpWebRequest)WebRequest.Create(usedEndpoint);
             request.Method = "GET";
 
             var username = accessToken.Username;

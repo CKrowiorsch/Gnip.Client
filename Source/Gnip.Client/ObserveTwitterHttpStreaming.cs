@@ -13,7 +13,7 @@ namespace Krowiorsch.Gnip
         public ObserveTwitterHttpStreaming(string streamingEndpoint, GnipAccessToken accessToken)
             : base(streamingEndpoint, accessToken)
         {
-            _webRequestBuilder = () => GnipTwitterWebRequest.Create(accessToken, streamingEndpoint);
+            _webRequestBuilder = () => GnipTwitterWebRequest.Create(accessToken, streamingEndpoint, true);
             Stream = base.Stream.Select(GnipActivityConvert.FromJson);
         }
 
