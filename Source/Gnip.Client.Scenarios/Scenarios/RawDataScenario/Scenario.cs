@@ -31,7 +31,7 @@ namespace Krowiorsch.Gnip.Scenarios.RawDataScenario
 
         static void OnNewLine(string line)
         {
-            Logger.Debug(string.Format("line:{0}", line));
+            Logger.Debug(string.Format("line:{0}", line.Substring(0,300)));
         }
     }
 }
