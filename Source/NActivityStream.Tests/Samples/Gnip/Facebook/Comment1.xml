@@ -1,4 +1,8 @@
-﻿<entry xmlns='http://www.w3.org/2005/Atom' xmlns:activity='http://activitystrea.ms/spec/1.0/' xmlns:service='http://activitystrea.ms/service-provider' xmlns:thr='http://purl.org/syndication/thread/1.0' xmlns:gnip='http://www.gnip.com/schemas/2010'>
+﻿<entry xmlns='http://www.w3.org/2005/Atom' 
+       xmlns:activity='http://activitystrea.ms/spec/1.0/' 
+       xmlns:service='http://activitystrea.ms/service-provider' 
+       xmlns:thr='http://purl.org/syndication/thread/1.0' 
+       xmlns:gnip='http://www.gnip.com/schemas/2010'>
   <id>50957555959_10151634728400960_28482842</id>
   <created>2013-05-10T08:29:11+00:00</created>
   <published>2013-05-10T08:29:11+00:00</published>

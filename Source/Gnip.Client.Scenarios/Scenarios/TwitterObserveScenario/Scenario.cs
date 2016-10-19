@@ -28,7 +28,7 @@ namespace Krowiorsch.Gnip.Scenarios.TwitterObserveScenario
 
             streaming.Stream.Subscribe(OnNewActivity);
 
-            return streaming.ReadAsync().ContinueWith(t => Logger.WarnException("Stream aborted", t.Exception));
+            return streaming.ReadAsync().ContinueWith(t => Logger.Warn(t.Exception, "Stream aborted"));
         }
 
         void OnNewActivity(Krowiorsch.Model.Activity activity)

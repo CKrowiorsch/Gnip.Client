@@ -17,9 +17,9 @@ namespace Krowiorsch.Converter
         Because of = () =>
             _result = GnipActivityConvert.FromXml(SamplesProvider.GnipFacebook.GetComment());
 
-        It should_be_of_type_activity = () => _result.ShouldBeOfType<FacebookActivity>();
+        It should_be_of_type_activity = () => _result.ShouldBeAssignableTo<FacebookActivity>();
 
-        It should_have_object_of_type_comment = () => _result.Object.ShouldBeOfType<ActivityObjectComment>();
+        It should_have_object_of_type_comment = () => _result.Object.ShouldBeAssignableTo<ActivityObjectComment>();
 
         It should_have_comment_with_title = () => _result.Object.As<ActivityObjectComment>().Title.ShouldEqual("ja sicher :-D ");
         It should_have_comment_with_Id = () => _result.Object.As<ActivityObjectComment>().Id.ShouldEqual("50957555959_10151634728400960_28482842");

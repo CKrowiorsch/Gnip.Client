@@ -43,14 +43,14 @@ namespace Krowiorsch.Gnip
             Processing = _internalProcessing = new Subject<ProcessingEventBase>();
         }
 
-        public Task ReadAsync()
+        public new Task ReadAsync()
         {
             _internalProcessing.OnNext(new ObserverGoingLive {StreamId = Endpoint.AbsoluteUri});
             return base.ReadAsync();
         }
 
         /// <summary> stream of activities  </summary>
-        public IObservable<Activity> Stream { get; set; }
+        public new IObservable<Activity> Stream { get; set; }
 
         public IObservable<ProcessingEventBase> Processing { get; private set; }
     }

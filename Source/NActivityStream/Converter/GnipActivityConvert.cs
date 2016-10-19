@@ -18,7 +18,7 @@ namespace Krowiorsch.Converter
         {
             var settings = new JsonSerializerSettings
             {
-                ContractResolver = new GnipContractResolver(), 
+                ContractResolver = new GnipContractResolver(),
                 ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
             };
 
@@ -35,16 +35,31 @@ namespace Krowiorsch.Converter
         public static Activity FromXml(string xmlString)
         {
             var document = XDocument.Load(new StringReader(xmlString));
-            
+
             // remove namespaces to flatten attributes
-            document.Descendants().Attributes().Where(a => a.IsNamespaceDeclaration).Remove();
+            var root = RemoveAllNamespaces(document.Root);
+            var json = JsonConvert.SerializeXNode(root, Formatting.None, true);
 
             var settings = new JsonSerializerSettings
             {
                 ContractResolver = new GnipXmlContractResolver(),
             };
 
-            return JsonConvert.DeserializeObject<FacebookActivity>(JsonConvert.SerializeXNode(document.Root, Formatting.None, true), settings);
+            return JsonConvert.DeserializeObject<FacebookActivity>(json, settings);
+        }
+
+        static XElement RemoveAllNamespaces(XElement xmlDocument)
+        {
+            if (!xmlDocument.HasElements)
+            {
+                var xElement = new XElement(xmlDocument.Name.LocalName) { Value = xmlDocument.Value };
+
+                foreach (var attribute in xmlDocument.Attributes())
+                    xElement.Add(attribute);
+
+                return xElement;
+            }
+            return new XElement(xmlDocument.Name.LocalName, xmlDocument.Elements().Select(RemoveAllNamespaces));
         }
 
 

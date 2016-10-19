@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Reactive.Subjects;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -142,12 +140,12 @@ namespace Krowiorsch.Gnip
                 }
                 catch (IOException e)
                 {
-                    Logger.WarnException(string.Format("Fehler while reading: {0}", e.Message), e);
+                    Logger.Warn(e, string.Format("Fehler while reading: {0}", e.Message));
                     return ClientDisconnectReason.Exception;
                 }
                 catch (Exception e)
                 {
-                    Logger.WarnException(string.Format("Fehler while reading: {0}", e.Message), e);
+                    Logger.Warn(e, string.Format("Fehler while reading: {0}", e.Message));
                     return ClientDisconnectReason.Exception;
                 }
 

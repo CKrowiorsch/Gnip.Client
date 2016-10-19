@@ -2,7 +2,6 @@
 using System.IO;
 
 using Krowiorsch.Gnip.Model;
-
 using NLog;
 
 using Newtonsoft.Json;
@@ -23,12 +22,19 @@ namespace Krowiorsch.Gnip
             var twitterAccessToken = GnipAccessToken.FromJsonStream(new FileStream(FileToAccessTokenTwitter, FileMode.Open));
             var streamingEndpoint = JsonConvert.DeserializeObject<string[]>(File.ReadAllText(FileToStreamingEndpoints));
 
+            var powertrackRules = "https://gnip-api.twitter.com/rules/powertrack/accounts/LandauMedia/publishers/twitter/dev.json";
+
+            //new Scenarios.RulesScenario.Scenario(accessToken, powertrackRules).Start();
+            
             Logger.Info(string.Format("Use AccessToken: Username:{0} Password:{1}", accessToken.Username, accessToken.Password));
             Logger.Info(string.Format("Use Endpoint: {0}", streamingEndpoint[0]));
 
+            //new Scenarios.TwitterObserveScenario.Scenario(accessToken, streamingEndpoint[0]).Start();
+            new Scenarios.RawDataScenario.Scenario(accessToken, streamingEndpoint[0]).Start();
+
             //new Scenarios.InstagramScenario.Scenario(accessToken, new[] {"https://landaumedia1.gnip.com/data_collectors/4"}).Start();
 
-            new Scenarios.TwitterReplayScenario.Scenario(twitterAccessToken, "https://stream.gnip.com:443/accounts/LandauMedia/publishers/twitter/replay/track/prod").Start();
+            //new Scenarios.TwitterReplayScenario.Scenario(twitterAccessToken, "https://stream.gnip.com:443/accounts/LandauMedia/publishers/twitter/replay/track/prod").Start();
             Console.ReadLine();
         }
     }

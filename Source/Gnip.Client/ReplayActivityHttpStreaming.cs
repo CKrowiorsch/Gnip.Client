@@ -4,9 +4,6 @@ using System.Linq;
 using System.Reactive.Subjects;
 using System.Threading;
 using System.Threading.Tasks;
-
-using C5;
-
 using Krowiorsch.Gnip.Events;
 using Krowiorsch.Gnip.Impl;
 using Krowiorsch.Gnip.Model;
@@ -15,15 +12,12 @@ using Krowiorsch.Gnip.Extensions;
 
 namespace Krowiorsch.Gnip
 {
-
     /// <summary> replay of activities </summary>
     public class ReplayActivityHttpStreaming : IHttpStreaming<Activity>, IProcessEvents
     {
         readonly CancellationTokenSource _cancellationTokenSource;
 
         readonly GnipAccessToken _accessToken;
-
-        readonly SortedArray<string> _idsAlreadySeen = new SortedArray<string>();
 
         DateTime _startDate;
         DateTime _stopDate;
@@ -65,7 +59,7 @@ namespace Krowiorsch.Gnip
 
                     var newIds = new List<string>();
 
-                    foreach (var activity in activities.Where(activity => !_idsAlreadySeen.Contains(activity.Id)))
+                    foreach (var activity in activities)
                     {
                         activity.Received = DateTime.Now;
 
@@ -74,7 +68,6 @@ namespace Krowiorsch.Gnip
                         _startDate = activity.Published;
                     }
 
-                    _idsAlreadySeen.AddAll(newIds);
                 }
                 while (activities.Count() == reader.MaxCount);
             });
