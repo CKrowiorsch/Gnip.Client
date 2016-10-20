@@ -10,10 +10,10 @@ namespace Krowiorsch.Gnip
 {
     public class ObserveTwitterHttpStreaming : ReconnectableHttpStreaming, IHttpStreaming<Activity>
     {
-        public ObserveTwitterHttpStreaming(string streamingEndpoint, GnipAccessToken accessToken)
+        public ObserveTwitterHttpStreaming(string streamingEndpoint, GnipAccessToken accessToken, bool useBackfill = false)
             : base(streamingEndpoint, accessToken)
         {
-            _webRequestBuilder = () => GnipTwitterWebRequest.Create(accessToken, streamingEndpoint, true);
+            _webRequestBuilder = () => GnipTwitterWebRequest.Create(accessToken, streamingEndpoint, useBackfill);
             Stream = base.Stream.Select(GnipActivityConvert.FromJson);
         }
 
