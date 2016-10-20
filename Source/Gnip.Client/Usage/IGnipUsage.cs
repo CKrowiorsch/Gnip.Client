@@ -11,6 +11,7 @@ namespace Krowiorsch.Gnip.Usage
 
     public class ProductUsage
     {
+        public string ProductName { get; set; }
         public string Label { get; set; }
 
         public IDictionary<DateTime, int> Usage { get; set; } 

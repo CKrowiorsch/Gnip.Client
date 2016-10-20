@@ -40,7 +40,8 @@ namespace Krowiorsch.Gnip.Usage
             {
                 var p = new ProductUsage
                 {
-                    Label = e.type + "-" + e.label,
+                    ProductName = e.type,
+                    Label = e.label,
                     Projected = e.projected.activities,
                 };
 
