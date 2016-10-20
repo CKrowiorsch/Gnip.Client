@@ -93,6 +93,8 @@
     <Compile Include="ReplayAndObserveActivityStreaming.cs" />
     <Compile Include="ReplayTwitterHttpStreaming.cs" />
     <Compile Include="ObserveTwitterHttpStreaming.cs" />
+    <Compile Include="Usage\GnipUsage.cs" />
+    <Compile Include="Usage\IGnipUsage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

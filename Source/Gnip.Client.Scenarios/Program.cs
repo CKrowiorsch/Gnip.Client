@@ -30,7 +30,8 @@ namespace Krowiorsch.Gnip
             Logger.Info(string.Format("Use Endpoint: {0}", streamingEndpoint[0]));
 
             //new Scenarios.TwitterObserveScenario.Scenario(accessToken, streamingEndpoint[0]).Start();
-            new Scenarios.RawDataScenario.Scenario(accessToken, streamingEndpoint[0]).Start();
+            //new Scenarios.RawDataScenario.Scenario(accessToken, streamingEndpoint[0]).Start();
+            new Scenarios.UsageScenario.Scenario(accessToken, "LandauMedia").Start();
 
             //new Scenarios.InstagramScenario.Scenario(accessToken, new[] {"https://landaumedia1.gnip.com/data_collectors/4"}).Start();
 

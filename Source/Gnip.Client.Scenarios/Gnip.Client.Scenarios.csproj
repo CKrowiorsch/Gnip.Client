@@ -75,6 +75,7 @@
     <Compile Include="Scenarios\SingleTypeScenario\Scenario.cs" />
     <Compile Include="Scenarios\TwitterObserveScenario\Scenario.cs" />
     <Compile Include="Scenarios\TwitterReplayScenario\Scenario.cs" />
+    <Compile Include="Scenarios\UsageScenario\Scenario.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
