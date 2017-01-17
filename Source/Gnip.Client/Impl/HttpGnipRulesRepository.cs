@@ -81,8 +81,8 @@ namespace Krowiorsch.Gnip.Impl
                        out responseString,
                        deleteJson);
 
-            if (resultCode == HttpStatusCode.OK)
-                    return;
+            if ((int)resultCode >= 200 && (int)resultCode < 300)
+                return;
 
             throw new InvalidOperationException(string.Format("Invalid HttpCode: {0}", resultCode));
         }
@@ -94,7 +94,7 @@ namespace Krowiorsch.Gnip.Impl
 
             if (resultCode == HttpStatusCode.OK)
                 return JsonConvert.DeserializeObject<Rules>(content).List;
-            
+
             throw new InvalidOperationException(string.Format("Invalid HttpCode: {0}", resultCode));
         }
 
