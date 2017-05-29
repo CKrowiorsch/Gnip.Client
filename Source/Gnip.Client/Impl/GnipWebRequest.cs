@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net;
-
+using System.Text;
 using Krowiorsch.Gnip.Model;
 
 namespace Krowiorsch.Gnip.Impl
@@ -46,6 +46,11 @@ namespace Krowiorsch.Gnip.Impl
 
             request.PreAuthenticate = true;
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
+
+
+            string authInfo = string.Format("{0}:{1}", username, password);
+            authInfo = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
+            request.Headers.Add("Authorization", "Basic " + authInfo);
             request.Headers.Add("Accept-Encoding", "gzip");
 
             return request;
