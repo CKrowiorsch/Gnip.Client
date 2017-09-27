@@ -29,25 +29,25 @@ namespace Krowiorsch.Gnip.Scenarios.RulesScenario
             {
                 Logger.Info("Vor Scenario ...");
 
-                foreach (var rule in rulesRepository.List())
-                {
-                    Logger.Info("Rule:{0}", rule.Value);
-                }
+                //foreach (var rule in rulesRepository.List())
+                //{
+                //    Logger.Info("Rule:{0}", rule.Value);
+                //}
 
                 var rules = new[]
                 {
-                    new Rule {Tag = "Test", Value = "CKrowiorsch"}
+                    new Rule {Tag = "LM", Value = "10"}
                 };
 
-                Logger.Info("Adding ...");
-                rulesRepository.Add(rules);
+                //Logger.Info("Adding ...");
+                //rulesRepository.Add(rules);
 
 
-                Logger.Info("Stand (after Add):");
-                foreach (var rule in rulesRepository.List())
-                {
-                    Logger.Info("Rule:{0}", rule.Value);
-                }
+                //Logger.Info("Stand (after Add):");
+                //foreach (var rule in rulesRepository.List())
+                //{
+                //    Logger.Info("Rule:{0}", rule.Value);
+                //}
 
                 Logger.Info("Cleanup ...");
                 rulesRepository.Delete(rules);

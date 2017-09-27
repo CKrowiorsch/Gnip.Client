@@ -24,7 +24,7 @@ namespace Krowiorsch.Gnip
 
             var powertrackRules = "https://gnip-api.twitter.com/rules/powertrack/accounts/LandauMedia/publishers/twitter/dev.json";
 
-            //new Scenarios.RulesScenario.Scenario(accessToken, powertrackRules).Start();
+            new Scenarios.RulesScenario.Scenario(accessToken, powertrackRules).Start();
             
             Logger.Info(string.Format("Use AccessToken: Username:{0} Password:{1}", accessToken.Username, accessToken.Password));
             Logger.Info(string.Format("Use Endpoint: {0}", streamingEndpoint[0]));
