@@ -44,6 +44,9 @@ namespace Krowiorsch.Gnip.Converter
             if (typeNode.InnerText.Equals("http://activitystrea.ms/schema/1.0/music", StringComparison.OrdinalIgnoreCase))
                 return typeof(ActivityMusic);
 
+            if (typeNode.InnerText.Equals("http://activitystrea.ms/schema/1.0/carousel", StringComparison.OrdinalIgnoreCase))
+                return typeof(ActivityCarousel);
+
 
             return typeof(Activity);
         }

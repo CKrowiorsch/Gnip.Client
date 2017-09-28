@@ -28,18 +28,22 @@ namespace Krowiorsch.Gnip.Scenarios.InstagramScenario
         {
             //var streams = _streamingEndpoints.Select(s => new ReconnectableHttpStreaming(s, _gnipAccessToken)).ToArray();
             var streams = _streamingEndpoints.Select(s => new ReplayAndObserveActivityStreaming(s, _gnipAccessToken, DateTime.Now.AddDays(-3))).ToArray();
+            //var streams = _streamingEndpoints.Select(s => new ObserveActivityStreaming(s, _gnipAccessToken)).ToArray();
 
             streams.Select(t => t.Stream)
                 .Merge()
                 .Subscribe(OnNewActivity);
 
-            streams.ElementAt(0).Processing.Subscribe(i => Logger.Debug(i));
+            //streams.ElementAt(0).Processing.Subscribe(i => Logger.Debug(i));
 
             return Task.WhenAll(streams.Select(s => s.ReadAsync()));
         }
 
         static void OnNewActivity(Activity activity)
         {
+            if (!(activity is ActivityImage || activity is ActivityVideo))
+                Logger.Info("NOTE");
+
             Logger.Info(string.Format("New Activity Provider:{2} [{0}]: {1}", activity.GetType().Name, activity.GetContent().ToSingleLine(), activity.Link));
         }
     }

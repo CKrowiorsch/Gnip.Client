@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Data\Activity.cs" />
     <Compile Include="Data\ActivityBookmark.cs" />
+    <Compile Include="Data\ActivityCarousel.cs" />
     <Compile Include="Data\ActivityComment.cs" />
     <Compile Include="Data\ActivityImage.cs" />
     <Compile Include="Data\ActivityMusic.cs" />

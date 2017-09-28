@@ -56,6 +56,9 @@ namespace Krowiorsch.Gnip.Converter
                 if (type == typeof(ActivityImage))
                     return DeserializeImage(xmlDocument, namespaceManager);
 
+                if (type == typeof(ActivityCarousel))
+                    return DeserializeCarousel(xmlDocument, namespaceManager);
+
                 return DeserializeUnknown(xmlDocument, namespaceManager);
             }
             catch (Exception e)
@@ -236,6 +239,27 @@ namespace Krowiorsch.Gnip.Converter
         static ActivityImage DeserializeImage(XmlDocument document, XmlNamespaceManager namespaceManager)
         {
             var image = new ActivityImage();
+            var root = image as Activity;
+
+            FillAtomFeedProperties(ref root, document, namespaceManager);
+
+            image.ImageContent = document.SelectSingleNode("atom:entry/activity:object/atom:content", namespaceManager).InnerTextOrEmpty();
+
+            image.HtmlViewLink = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='alternate']/@href", namespaceManager).InnerTextOrEmpty();
+            image.PreviewLink = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='preview']/@href", namespaceManager).InnerTextOrEmpty();
+            image.EnclosureLink = document.SelectSingleNode("atom:entry/activity:object/atom:link[@rel='enclosure']/@href", namespaceManager).InnerTextOrEmpty();
+            image.Category = document.SelectNodesOrEmpty("atom:entry/activity:object/atom:category/@term", namespaceManager)
+                .OfType<XmlAttribute>().Select(t => t.ValueOrEmpty()).ToArray();
+
+            var likeCount = document.SelectSingleNode("atom:entry/activity:object/gnip:statistics/@favoriteCount", namespaceManager).ValueOrEmpty();
+            image.LikeCount = string.IsNullOrEmpty(likeCount) ? 0 : int.Parse(likeCount);
+
+            return image;
+        }
+
+        static ActivityCarousel DeserializeCarousel(XmlDocument document, XmlNamespaceManager namespaceManager)
+        {
+            var image = new ActivityCarousel();
             var root = image as Activity;
 
             FillAtomFeedProperties(ref root, document, namespaceManager);
