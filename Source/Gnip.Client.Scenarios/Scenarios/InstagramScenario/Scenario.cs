@@ -41,10 +41,7 @@ namespace Krowiorsch.Gnip.Scenarios.InstagramScenario
 
         static void OnNewActivity(Activity activity)
         {
-            if (!(activity is ActivityImage || activity is ActivityVideo))
-                Logger.Info("NOTE");
-
-            Logger.Info(string.Format("New Activity Provider:{2} [{0}]: {1}", activity.GetType().Name, activity.GetContent().ToSingleLine(), activity.Link));
+            Logger.Info("New Activity Provider:{2} [{0}]: {1}", activity.GetType().Name, activity.GetContent().ToSingleLine(), activity.Link);
         }
     }
 }
