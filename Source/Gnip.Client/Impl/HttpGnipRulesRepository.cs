@@ -74,8 +74,8 @@ namespace Krowiorsch.Gnip.Impl
             string responseString;
 
             var resultCode = Rest.GetRestResponse(
-                       "DELETE",
-                       _rulesEndpoint,
+                       "POST",
+                       _rulesEndpoint + "?_method=delete",
                        _accessToken.Username,
                        _accessToken.Password,
                        out responseString,
@@ -86,6 +86,8 @@ namespace Krowiorsch.Gnip.Impl
 
             throw new InvalidOperationException(string.Format("Invalid HttpCode: {0}", resultCode));
         }
+
+
 
         public Rule[] List()
         {
