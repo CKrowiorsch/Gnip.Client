@@ -20,45 +20,46 @@ namespace Krowiorsch.Gnip.Scenarios.RulesScenario
             _baseEndpoint = baseEndpoint;
         }
 
-        public Task Start()
+        public async Task Start()
         {
             Logger.Debug("Start Scenario");
             var rulesRepository = new HttpGnipRulesRepository(_baseEndpoint, _gnipAccessToken);
 
-            return Task.Factory.StartNew(() =>
-            {
-                Logger.Info("Vor Scenario ...");
+            Logger.Info("Vor Scenario ...");
 
-                //foreach (var rule in rulesRepository.List())
-                //{
-                //    Logger.Info("Rule:{0}", rule.Value);
-                //}
+            var list = rulesRepository.List();
 
-                var rules = new[]
+            //foreach (var rule in rulesRepository.List())
+            //{
+            //    Logger.Info("Rule:{0}", rule.Value);
+            //}
+
+            var rules = new[]
                 {
-                    new Rule {Tag = "LM", Value = "10"}
+                    new Rule {Value = "007seven"}
                 };
 
-                //Logger.Info("Adding ...");
-                //rulesRepository.Add(rules);
+            //Logger.Info("Adding ...");
+            //rulesRepository.Add(rules);
 
 
-                //Logger.Info("Stand (after Add):");
-                //foreach (var rule in rulesRepository.List())
-                //{
-                //    Logger.Info("Rule:{0}", rule.Value);
-                //}
+            //Logger.Info("Stand (after Add):");
+            //foreach (var rule in rulesRepository.List())
+            //{
+            //    Logger.Info("Rule:{0}", rule.Value);
+            //}
 
-                Logger.Info("Cleanup ...");
-                rulesRepository.Delete(rules);
+            Logger.Info("Cleanup ...");
+            rulesRepository.Delete(rules);
 
 
-                Logger.Info("Stand (after cleanup):");
-                foreach (var rule in rulesRepository.List())
-                {
-                    Logger.Info("Rule:{0}", rule.Value);
-                }
-            });
+            Logger.Info("Stand (after cleanup):");
+            foreach (var rule in rulesRepository.List())
+            {
+                Logger.Info("Rule:{0}", rule.Value);
+            }
+
+            
         }
     }
 }

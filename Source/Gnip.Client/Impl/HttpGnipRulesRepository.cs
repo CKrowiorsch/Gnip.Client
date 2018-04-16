@@ -74,8 +74,8 @@ namespace Krowiorsch.Gnip.Impl
             string responseString;
 
             var resultCode = Rest.GetRestResponse(
-                       "POST",
-                       _rulesEndpoint + "?_method=delete",
+                       "DELETE",
+                       _rulesEndpoint,
                        _accessToken.Username,
                        _accessToken.Password,
                        out responseString,
