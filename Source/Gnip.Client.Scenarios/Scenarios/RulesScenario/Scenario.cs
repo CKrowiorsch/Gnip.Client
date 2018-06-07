@@ -20,7 +20,7 @@ namespace Krowiorsch.Gnip.Scenarios.RulesScenario
             _baseEndpoint = baseEndpoint;
         }
 
-        public async Task Start()
+        public void Start()
         {
             Logger.Debug("Start Scenario");
             var rulesRepository = new HttpGnipRulesRepository(_baseEndpoint, _gnipAccessToken);
@@ -39,8 +39,8 @@ namespace Krowiorsch.Gnip.Scenarios.RulesScenario
                     new Rule {Value = "007seven"}
                 };
 
-            //Logger.Info("Adding ...");
-            //rulesRepository.Add(rules);
+            Logger.Info("Adding ...");
+            rulesRepository.Add(rules);
 
 
             //Logger.Info("Stand (after Add):");

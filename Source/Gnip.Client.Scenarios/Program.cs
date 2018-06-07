@@ -18,16 +18,17 @@ namespace Krowiorsch.Gnip
             const string FileToAccessTokenTwitter = @"c:\Data\gnip_twitter_access.json";
             const string FileToStreamingEndpoints = @"c:\Data\gnip_twitter_endpoint.json";
 
-            var accessToken = GnipAccessToken.FromJsonStream(new FileStream(FileToAccessToken, FileMode.Open));
+            
+            var accessToken = GnipAccessToken.FromJsonStream(new FileStream(FileToAccessTokenTwitter, FileMode.Open));
             var twitterAccessToken = GnipAccessToken.FromJsonStream(new FileStream(FileToAccessTokenTwitter, FileMode.Open));
             var streamingEndpoint = JsonConvert.DeserializeObject<string[]>(File.ReadAllText(FileToStreamingEndpoints));
 
             var powertrackRules = "https://gnip-api.twitter.com/rules/powertrack/accounts/LandauMedia/publishers/twitter/dev.json";
 
             //new Scenarios.InstagramScenario.Scenario(accessToken, new[] { "https://landaumedia1.gnip.com/data_collectors/4" }).Start();
-            new Scenarios.RulesScenario.Scenario(accessToken, "https://landaumedia1.gnip.com/data_collectors/4/rules.json").Start();
+            //new Scenarios.RulesScenario.Scenario(accessToken, "https://landaumedia1.gnip.com/data_collectors/4/rules.json").Start();
             Console.ReadLine();
-            //new Scenarios.RulesScenario.Scenario(accessToken, powertrackRules).Start();
+            new Scenarios.RulesScenario.Scenario(accessToken, powertrackRules).Start();
             
             Logger.Info(string.Format("Use AccessToken: Username:{0} Password:{1}", accessToken.Username, accessToken.Password));
             Logger.Info(string.Format("Use Endpoint: {0}", streamingEndpoint[0]));
