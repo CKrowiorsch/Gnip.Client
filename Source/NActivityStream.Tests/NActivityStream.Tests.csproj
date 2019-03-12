@@ -53,7 +53,6 @@
   <ItemGroup>
     <Compile Include="Converter\when_deserialize_gnip_twitter_retweet.cs" />
     <Compile Include="Converter\Specific\when_deserialize_specific_entity.cs" />
-    <Compile Include="Converter\when_deserialize_gnip_facebook.cs" />
     <Compile Include="Converter\when_deserialize_gnip_twitter.cs" />
     <Compile Include="Converter\when_deserialize_minimal_spec.cs" />
     <Compile Include="Converter\when_serialize_and_deserialize_minimal_activity.cs" />
