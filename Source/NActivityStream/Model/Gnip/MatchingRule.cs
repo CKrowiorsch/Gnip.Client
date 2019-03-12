@@ -2,8 +2,7 @@
 {
     public class MatchingRule
     {
-        public string Value { get; set; }
-
         public string Tag { get; set; }
+        public string Id { get; set; }
     }
 }

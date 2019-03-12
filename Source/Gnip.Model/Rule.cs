@@ -7,6 +7,9 @@ namespace Krowiorsch.Gnip.Model
         [JsonProperty("tag")]
         public string Tag { get; set; }
 
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
         [JsonProperty("value")]
         public string Value { get; set; }
 

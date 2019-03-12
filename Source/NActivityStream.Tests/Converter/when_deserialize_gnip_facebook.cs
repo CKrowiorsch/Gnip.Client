@@ -34,7 +34,7 @@ namespace Krowiorsch.Converter
 
         It should_have_a_matching_rule_with_tag_lm = () => _result.As<FacebookActivity>().MatchingRules[0].Tag.ShouldEqual("LM");
         
-        It should_have_a_matching_rule_with_value_50957555959 = () => _result.As<FacebookActivity>().MatchingRules[0].Value.ShouldEqual("50957555959");
+        It should_have_a_matching_rule_with_value_50957555959 = () => _result.As<FacebookActivity>().MatchingRules[0].Id.ShouldEqual("50957555959");
 
         It should_have_a_actor = () => _result.Actor.ShouldNotBeNull();
 
