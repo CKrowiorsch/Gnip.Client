@@ -15,6 +15,16 @@ namespace Krowiorsch.Gnip.Model.Data
         /// <summary> Statistics Informations </summary>
         public IDictionary<string, long> Statistics { get; set; }
 
+        /// <summary>
+        /// Die Herkunft des Autoren
+        /// </summary>
+        public string Herkunft { get; set; }
+
+        /// <summary>
+        /// Die Sprache des Autoren
+        /// </summary>
+        public string Sprache { get; set; }
+
         /// <summary> bekannte Einträge für Autorhenstatistiken </summary>
         public class KnownActorStatistics
         {
